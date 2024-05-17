@@ -47,7 +47,7 @@ const BurgerMenu = () => {
   };
 
   return (
-    <div>
+    <div className="block md:hidden">
       <RxHamburgerMenu
         className="md:hidden w-6 h-6 cursor-pointer"
         onClick={toggleMenu}
