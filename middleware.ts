@@ -6,7 +6,9 @@ export default auth((req) => {
     return NextResponse.redirect(new URL("/", req.nextUrl));
   }
 
-  
+  if (req.nextUrl.pathname === "/admin" && req.auth?.user.role !== "ADMIN") {
+    return NextResponse.redirect(new URL("/", req.nextUrl));
+  }
 });
 
 export const config = {

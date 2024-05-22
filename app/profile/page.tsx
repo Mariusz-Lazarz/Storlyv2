@@ -1,9 +1,11 @@
 import { getServerUser } from "@/utils/authUtils";
 import { signOut } from "@/auth";
 import { Button } from "@/components/ui/button";
+import { auth } from "@/auth";
 
 const SettingsPage = async () => {
   const user = await getServerUser();
+  const session = await auth();
   return (
     <div className="container p-20">
       <div className="flex gap-4 flex-col">
@@ -25,6 +27,7 @@ const SettingsPage = async () => {
           <span className="text-lg uppercase">{user?.email}</span>
         </div>
       </div>
+      <div>{JSON.stringify(session)}</div>
     </div>
   );
 };
