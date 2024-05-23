@@ -1,14 +1,29 @@
 import { auth } from "@/auth";
 import { NextResponse } from "next/server";
+import { adminRoutes, publicRoutes, apiAuth } from "./routes";
 
 export default auth((req) => {
-  if (req.nextUrl.pathname === "/profile" && !req.auth) {
-    return NextResponse.redirect(new URL("/", req.nextUrl));
+  const { nextUrl } = req;
+  const isLoggedIn = !!req.auth;
+  const isAdminRole = req.auth?.user?.role === "ADMIN";
+
+  const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuth);
+  const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
+  const isAdminRoute = adminRoutes.includes(nextUrl.pathname);
+
+  if (isApiAuthRoute) {
+    return;
   }
 
-  if (req.nextUrl.pathname === "/admin" && req.auth?.user.role !== "ADMIN") {
-    return NextResponse.redirect(new URL("/", req.nextUrl));
+  if (isAdminRoute && !isAdminRole) {
+    return NextResponse.redirect(new URL("/", nextUrl));
   }
+
+  if (!isPublicRoute && !isLoggedIn) {
+    return NextResponse.redirect(new URL("/", nextUrl));
+  }
+
+  return;
 });
 
 export const config = {
