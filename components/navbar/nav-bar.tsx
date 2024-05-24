@@ -8,7 +8,7 @@ import FavouritesButton from "./favourites-button";
 
 const NavBar = () => {
   return (
-    <header className="p-4 border-b-[1px]">
+    <header className="p-4">
       <nav className="flex justify-between items-center w-full">
         {/* user logo */}
         <div className="hidden flex-1 md:flex justify-start items-center">

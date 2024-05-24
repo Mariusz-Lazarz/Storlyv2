@@ -1,3 +1,5 @@
+import Banner from "@/components/banner";
+
 export default async function Home() {
-  return <div>kupa</div>;
+  return <Banner />;
 }
