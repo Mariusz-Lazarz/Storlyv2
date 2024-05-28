@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Carousel,
   CarouselContent,
@@ -5,6 +7,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 
 const INFO = [
   {
@@ -15,12 +18,23 @@ const INFO = [
     title: "Free Shipping and Returns",
     description: "Get 30 Days of Free Returns",
   },
+  {
+    title: "Loyalty Program",
+    description:
+      "Earn points on every purchase and get exclusive rewards. Sign up and get 100 bonus points!",
+  },
 ];
 
 const InfoBanner = () => {
   return (
     <div className="bg-gray-100 flex justify-center items-center p-4">
-      <Carousel>
+      <Carousel
+        plugins={[
+          Autoplay({
+            delay: 3000,
+          }),
+        ]}
+      >
         <CarouselContent>
           {INFO.map((item, index) => (
             <CarouselItem key={item.title + index}>
@@ -31,8 +45,6 @@ const InfoBanner = () => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
       </Carousel>
     </div>
   );

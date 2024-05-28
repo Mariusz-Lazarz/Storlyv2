@@ -77,7 +77,7 @@ const BurgerMenu = () => {
 
       <div
         className={`bg-white z-50 p-6 space-y-4 w-screen h-screen absolute top-0 right-0 transition-transform duration-300 ${
-          isSubMenuOpen ? "translate-x-0" : "translate-x-full"
+          isSubMenuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         <span
