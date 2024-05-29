@@ -1,4 +1,4 @@
-export const publicRoutes = ["/", "/test"];
+export const publicRoutes = ["/", "/test", "/products"];
 
 export const adminRoutes = ["/admin"];
 

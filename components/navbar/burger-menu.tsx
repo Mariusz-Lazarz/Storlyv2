@@ -117,11 +117,7 @@ const BurgerMenu = () => {
           {selectedCategory &&
             selectedCategory.subCategory.map((subCategory, index) => (
               <Link
-                href={
-                  subCategory.startsWith("All")
-                    ? `/products?gender=${gender.toLowerCase()}&category=${selectedCategory.category.toLowerCase()}`
-                    : `/products?gender=${gender.toLowerCase()}&category=${selectedCategory.category.toLowerCase()}&subcategory=${subCategory.toLowerCase()}`
-                }
+                href="/products"
                 className="text-2xl flex items-center w-full"
                 key={`${subCategory}-${index}`}
               >

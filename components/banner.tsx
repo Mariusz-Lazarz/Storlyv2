@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Button } from "./ui/button";
 import BannerImg from "@/public/banner10.webp";
+import Link from "next/link";
 
 const Banner = () => {
   return (
@@ -20,9 +21,11 @@ const Banner = () => {
         <p className="text-sm md:text-lg font-bold my-4">
           Shop the latest sportswear and equipment at unbeatable prices.
         </p>
-        <Button variant="secondary" className="rounded-full">
-          Browse
-        </Button>
+        <Link href="/products">
+          <Button variant="secondary" className="rounded-full">
+            Browse
+          </Button>
+        </Link>
       </div>
     </div>
   );

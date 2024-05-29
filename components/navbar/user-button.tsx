@@ -1,3 +1,5 @@
+"use client";
+
 import { IoPersonOutline } from "react-icons/io5";
 import {
   Dialog,
@@ -9,11 +11,11 @@ import {
 } from "@/components/ui/dialog";
 import { Social } from "./social";
 import Link from "next/link";
-import { getServerUser } from "@/utils/authUtils";
+import { useSession } from "next-auth/react";
 
-const UserButton = async () => {
-  const user = await getServerUser();
-  if (!user)
+const UserButton = () => {
+  const { data: session } = useSession();
+  if (!session?.user)
     return (
       <Dialog>
         <DialogTrigger>

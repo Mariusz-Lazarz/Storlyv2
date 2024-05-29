@@ -14,22 +14,14 @@ import {
 } from "@/components/ui/navigation-menu";
 import { GENDER_CATEGORIES, PRODUCT_CATEGORIES } from "@/lib/variables";
 
-const CategoryMenu = ({ genderCategory }: { genderCategory: string }) => {
+const CategoryMenu = () => {
   return PRODUCT_CATEGORIES.map((category, index) => (
     <div className="space-y-2" key={`${category.category}-${index}`}>
       <span className="font-semibold">{category.category}</span>
       <div>
         {category.subCategory.map((sub, subIndex) => (
           <NavigationMenuItem key={`${sub}-${subIndex}`}>
-            <Link
-              href={
-                sub.startsWith("All")
-                  ? `/products?gender=${genderCategory.toLowerCase()}&category=${category.category.toLowerCase()}`
-                  : `/products?gender=${genderCategory.toLowerCase()}&category=${category.category.toLowerCase()}&subcategory=${sub.toLowerCase()}`
-              }
-              legacyBehavior
-              passHref
-            >
+            <Link href="/products" legacyBehavior passHref>
               <NavigationMenuLink
                 className={`${navigationMenuTriggerStyle()} opacity-50 hover:opacity-100`}
               >
@@ -54,8 +46,8 @@ export const NavMenu = () => {
             </NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="w-screen">
-                <div className="flex justify-center items-center gap-8 p-4">
-                  <CategoryMenu genderCategory={genderCategory} />
+                <div className="flex justify-center items-start gap-20 p-4">
+                  <CategoryMenu />
                 </div>
               </ul>
             </NavigationMenuContent>
