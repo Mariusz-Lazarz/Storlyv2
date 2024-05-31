@@ -10,7 +10,7 @@ const Banner = () => {
         <Image
           src={BannerImg}
           alt="banner"
-          style={{ objectFit: "cover", objectPosition: "center top" }}
+          style={{ objectFit: "fill", objectPosition: "center" }}
           fill
         />
       </div>

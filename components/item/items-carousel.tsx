@@ -1,4 +1,4 @@
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import Image from "next/image";
 
 import {
@@ -29,7 +29,7 @@ const ItemsCarousel = ({ title }: ItemsCarouselProps) => {
           {Array.from({ length: 10 }).map((_, index) => (
             <CarouselItem
               key={index}
-              className="flex-shrink-0 basis-[85%] sm:basis-[70%] md:basis-1/2 lg:basis-1/5 p-2"
+              className="flex-shrink-0 basis-[85%] sm:basis-[70%] md:basis-1/2 lg:basis-1/3 p-2"
             >
               <div className="relative w-full h-[450px] md:h-[600px]">
                 <Image

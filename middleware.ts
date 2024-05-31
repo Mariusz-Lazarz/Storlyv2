@@ -8,7 +8,9 @@ export default auth((req) => {
   const isAdminRole = req.auth?.user?.role === "ADMIN";
 
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuth);
-  const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
+  const isPublicRoute =
+    publicRoutes.includes(nextUrl.pathname) ||
+    nextUrl.pathname.startsWith("/products/");
   const isAdminRoute = adminRoutes.includes(nextUrl.pathname);
 
   if (isApiAuthRoute) {
@@ -23,7 +25,7 @@ export default auth((req) => {
     return NextResponse.redirect(new URL("/", nextUrl));
   }
 
-  return;
+  return NextResponse.next();
 });
 
 export const config = {

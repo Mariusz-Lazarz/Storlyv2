@@ -1,4 +1,4 @@
-import ItemsGrid from "@/components/items-grid";
+import ItemsGrid from "@/components/item/items-grid";
 
 const ProductsPage = () => {
   return <ItemsGrid />;

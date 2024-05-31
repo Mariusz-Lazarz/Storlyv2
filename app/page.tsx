@@ -1,6 +1,5 @@
 import Banner from "@/components/banner";
-import ItemsCarousel from "@/components/items-carousel";
-import Item from "@/components/item";
+import ItemsCarousel from "@/components/item/items-carousel";
 
 export default async function Home() {
   return (

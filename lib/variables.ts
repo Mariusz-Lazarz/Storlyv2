@@ -1,4 +1,9 @@
-export const GENDER_CATEGORIES = ["Man", "Woman", "Kids"];
+export const GENDER_CATEGORIES = [
+  "New and recommended",
+  "Man",
+  "Woman",
+  "Kids",
+];
 export const PRODUCT_CATEGORIES = [
   {
     category: "Shoes",
