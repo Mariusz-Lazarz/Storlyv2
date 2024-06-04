@@ -5,7 +5,7 @@ export default async function Home() {
   return (
     <>
       <Banner />
-      <div className="p-8">
+      <div className="p-2">
         <ItemsCarousel title="Check our iconic items " />
       </div>
     </>
