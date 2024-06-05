@@ -9,12 +9,13 @@ interface ItemProp {
     brand: string;
     price: number;
     image: string;
+    id: string;
   };
 }
 
 const Item = ({ item }: ItemProp) => {
   return (
-    <Link href="/products/p1">
+    <Link href={`/products/${item.id}`}>
       <div className="hover:cursor-pointer">
         <div className="relative w-full h-48 md:h-72 lg:h-96 shadow-md transition-all duration-300 hover:scale-105">
           <Image

@@ -13,6 +13,8 @@ export default auth((req) => {
     nextUrl.pathname.startsWith("/products/");
   const isAdminRoute = adminRoutes.includes(nextUrl.pathname);
 
+  console.log(nextUrl.pathname);
+
   if (isApiAuthRoute) {
     return;
   }
@@ -29,5 +31,5 @@ export default auth((req) => {
 });
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
 };

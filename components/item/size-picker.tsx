@@ -25,7 +25,9 @@ const SizePicker = () => {
             <Button
               variant="outline"
               key={index}
-              className="p-6 text-lg"
+              className={`p-6 text-lg ${
+                size == `EU ${36 + index}` ? "border-2 border-blue-500" : ""
+              }`}
               onClick={handleClick}
             >
               {`EU ${36 + index}`}

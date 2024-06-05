@@ -45,4 +45,15 @@ model Account {
  
   @@id([provider, providerAccountId])
 }
+
+
+model Product {
+  id            String          @id @default(cuid())
+  name String
+  image String
+  brand String 
+  gender String 
+  category String
+  price Int
+}
  
