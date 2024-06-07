@@ -13,8 +13,6 @@ export default auth((req) => {
     nextUrl.pathname.startsWith("/products/");
   const isAdminRoute = adminRoutes.includes(nextUrl.pathname);
 
-  console.log(nextUrl.pathname);
-
   if (isApiAuthRoute) {
     return;
   }

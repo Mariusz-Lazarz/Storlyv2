@@ -1,55 +1,53 @@
 "use client";
 import Item from "./item";
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import axios from "axios";
 import LoadingBar from "../loading-bar";
-import { Button } from "../ui/button";
+import Filter from "./filter";
+import { ItemProps } from "@/lib/definition";
+import { useSearchParams } from "next/navigation";
 
-interface ItemProps {
-  id: string;
-  name: string;
-  image: string;
-  brand: string;
-  gender: string;
-  category: string;
-  price: number;
-}
-
-interface ItemsGridProps {
-  initialItems: ItemProps[];
-}
-
-const ItemsGrid = ({ initialItems }: ItemsGridProps) => {
-  const [items, setItems] = useState<ItemProps[]>(initialItems);
-  const [page, setPage] = useState<number>(1);
+const ItemsGrid = () => {
+  const [items, setItems] = useState<ItemProps[]>([]);
+  const [page, setPage] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const observer = useRef<IntersectionObserver | null>(null);
-  const [hasMore, setHasMore] = useState(true);
+  const [hasMore, setHasMore] = useState<boolean>(true);
+  const [isSticky, setIsSticky] = useState<boolean>(false);
+  const [isFilterVisible, setIsFilterVisible] = useState<boolean>(false);
+  const searchParams = useSearchParams();
+  const sort = searchParams.get("sort") || "featured";
 
-  const loadMoreItems = useCallback(async () => {
-    if (!hasMore) return;
+  const handleFilterClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setIsFilterVisible((prev) => !prev);
+  };
 
-    setIsLoading(true);
-    try {
-      const res = await axios.get(
-        `http://localhost:3000/api/test?page=${page}`
-      );
-      const newItems: ItemProps[] = res.data;
+  const loadItems = useCallback(
+    async (currentPage: number) => {
+      setIsLoading(true);
+      try {
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_MY_API_BASE_URL}/api/products?page=${currentPage}&sort=${sort}`
+        );
+        const newItems: ItemProps[] = res.data;
 
-      console.log(newItems);
-
-      if (newItems.length === 0) {
-        setHasMore(false); // No more items to load
-      } else {
-        setItems((prevItems) => [...prevItems, ...newItems]);
-        setPage((prevPage) => prevPage + 1);
+        if (newItems.length === 0) {
+          setHasMore(false);
+        } else {
+          setItems((prevItems) =>
+            currentPage === 0 ? newItems : [...prevItems, ...newItems]
+          );
+          setPage(currentPage + 1);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
       }
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [page, hasMore]);
+    },
+    [sort]
+  );
 
   const lastElementRef = useCallback(
     (node: HTMLDivElement | null) => {
@@ -57,27 +55,52 @@ const ItemsGrid = ({ initialItems }: ItemsGridProps) => {
         observer.current.disconnect();
       }
       observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && !isLoading) {
-          loadMoreItems();
+        if (entries[0].isIntersecting && !isLoading && hasMore) {
+          loadItems(page);
         }
       });
       if (node) {
         observer.current.observe(node);
       }
     },
-    [isLoading, loadMoreItems]
+    [isLoading, loadItems, page, hasMore]
   );
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsSticky(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    setItems([]);
+    setPage(0);
+    setHasMore(true);
+    loadItems(0);
+  }, [sort, loadItems]);
+
   return (
-    <div className="py-6 px-2">
-      <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
+    <>
+      <Filter
+        isSticky={isSticky}
+        itemsLength={items.length}
+        isFilterVisible={isFilterVisible}
+        onFilterClick={handleFilterClick}
+      />
+      {/* items grid */}
+      <div className="p-4 grid gap-4 grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
         {items.map((item) => (
           <Item key={item.id} item={item} />
         ))}
       </div>
       <div ref={lastElementRef} />
       {isLoading && <LoadingBar />}
-    </div>
+    </>
   );
 };
 

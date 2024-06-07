@@ -3,7 +3,7 @@ export const publicRoutes = [
   "/test",
   "/products",
   "/not-found",
-  "/api/test",
+  "/api/products",
 ];
 
 export const adminRoutes = ["/admin"];
