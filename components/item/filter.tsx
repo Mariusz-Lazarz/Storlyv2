@@ -10,9 +10,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "../ui/button";
-import { useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { useCallback } from "react";
 
 const Filter = ({
   isSticky,
@@ -27,7 +26,7 @@ const Filter = ({
 }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const [sortValue, setSortValue] = useState<string | undefined>("featured");
+  const pathname = usePathname();
 
   const sortBy = [
     { value: "max", text: "Max price" },
@@ -36,21 +35,16 @@ const Filter = ({
     { value: "featured", text: "Featured" },
   ];
 
-  const handleSortChange = (value: string) => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("sort", value);
-    router.push(`?${params.toString()}`);
-  };
-
-  useEffect(() => {
-    if (!searchParams.get("sort")) {
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
       const params = new URLSearchParams(searchParams.toString());
-      params.set("sort", "featured");
-      router.replace(`?${params.toString()}`);
-    } else {
-      setSortValue(searchParams.get("sort") || "featured");
-    }
-  }, [searchParams, router]);
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams]
+  );
+
   return (
     <div
       className={`flex justify-between items-center p-4 transition-all duration-500 ease-in-out z-50 ${
@@ -78,9 +72,10 @@ const Filter = ({
           <IoFilter />
         </Button>
         <Select
-          onValueChange={(value) => handleSortChange(value)}
-          value={sortValue}
-          defaultValue="featured"
+          onValueChange={(value: string) =>
+            router.push(pathname + "?" + createQueryString("sort", value))
+          }
+          value={searchParams.get("sort") || "featured"}
         >
           <SelectTrigger className="w-[140px] border-0 shadow-none md:text-lg">
             <SelectValue

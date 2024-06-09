@@ -4,7 +4,6 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const page = Number(searchParams.get("page"));
   const sort = searchParams.get("sort");
-  console.log(page);
 
   const sortBy: any = {};
 

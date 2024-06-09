@@ -28,7 +28,12 @@ const Item = ({ item }: ItemProp) => {
         <div className="flex flex-col mt-4">
           <span className="text-orange-700 font-semibold">Bestseller</span>
           <span className="font-bold">{item.name}</span>
-          <span className="font-semibold text-gray-400">{item.brand}</span>
+          <span className="font-semibold text-gray-400">
+            {item.brand
+              .split(" ")
+              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+              .join(" ")}
+          </span>
           <span className="font-semibold">${String(item.price)}</span>
         </div>
       </div>

@@ -5,7 +5,7 @@ import axios from "axios";
 import LoadingBar from "../loading-bar";
 import Filter from "./filter";
 import { ItemProps } from "@/lib/definition";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 
 const ItemsGrid = () => {
   const [items, setItems] = useState<ItemProps[]>([]);
@@ -16,7 +16,7 @@ const ItemsGrid = () => {
   const [isSticky, setIsSticky] = useState<boolean>(false);
   const [isFilterVisible, setIsFilterVisible] = useState<boolean>(false);
   const searchParams = useSearchParams();
-  const sort = searchParams.get("sort") || "featured";
+  // const sort = searchParams.get("sort") || "featured";
 
   const handleFilterClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -28,7 +28,9 @@ const ItemsGrid = () => {
       setIsLoading(true);
       try {
         const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_MY_API_BASE_URL}/api/products?page=${currentPage}&sort=${sort}`
+          `${
+            process.env.NEXT_PUBLIC_MY_API_BASE_URL
+          }/api/products?page=${currentPage}&${searchParams.toString()}`
         );
         const newItems: ItemProps[] = res.data;
 
@@ -46,7 +48,7 @@ const ItemsGrid = () => {
         setIsLoading(false);
       }
     },
-    [sort]
+    [searchParams]
   );
 
   const lastElementRef = useCallback(
@@ -82,7 +84,7 @@ const ItemsGrid = () => {
     setPage(0);
     setHasMore(true);
     loadItems(0);
-  }, [sort, loadItems]);
+  }, [loadItems]);
 
   return (
     <>
