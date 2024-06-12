@@ -23,6 +23,7 @@ const Item = ({ item }: ItemProp) => {
             fill
             style={{ objectFit: "fill" }}
             alt="image"
+            loading="lazy"
           />
         </div>
         <div className="flex flex-col mt-4">

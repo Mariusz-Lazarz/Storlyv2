@@ -5,7 +5,7 @@ import axios from "axios";
 import LoadingBar from "../loading-bar";
 import Filter from "./filter";
 import { ItemProps } from "@/lib/definition";
-import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 const ItemsGrid = () => {
   const [items, setItems] = useState<ItemProps[]>([]);
@@ -16,11 +16,11 @@ const ItemsGrid = () => {
   const [isSticky, setIsSticky] = useState<boolean>(false);
   const [isFilterVisible, setIsFilterVisible] = useState<boolean>(false);
   const searchParams = useSearchParams();
-  // const sort = searchParams.get("sort") || "featured";
 
-  const handleFilterClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setIsFilterVisible((prev) => !prev);
+  console.log(items);
+
+  const handleFilterClick = (open: boolean) => {
+    setIsFilterVisible(open);
   };
 
   const loadItems = useCallback(

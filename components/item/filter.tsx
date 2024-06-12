@@ -1,17 +1,19 @@
 "use client";
 
 import { IoFilter } from "react-icons/io5";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import Sort from "./sort";
 import { Button } from "../ui/button";
-import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import { useCallback } from "react";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+import FilterAccordion from "./filter-accordion";
 
 const Filter = ({
   isSticky,
@@ -22,29 +24,8 @@ const Filter = ({
   isSticky: boolean;
   itemsLength: number;
   isFilterVisible: boolean;
-  onFilterClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onFilterClick: (open: boolean) => void;
 }) => {
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const pathname = usePathname();
-
-  const sortBy = [
-    { value: "max", text: "Max price" },
-    { value: "min", text: "Min price" },
-    { value: "newest", text: "Newest" },
-    { value: "featured", text: "Featured" },
-  ];
-
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString());
-      params.set(name, value);
-
-      return params.toString();
-    },
-    [searchParams]
-  );
-
   return (
     <div
       className={`flex justify-between items-center p-4 transition-all duration-500 ease-in-out z-50 ${
@@ -63,40 +44,31 @@ const Filter = ({
         </span>
       </div>
       <div className="flex gap-4">
-        <Button
-          variant="ghost"
-          onClick={onFilterClick}
-          className="flex flex-row items-center gap-2 cursor-pointer md:text-lg"
-        >
-          <span>{isFilterVisible ? "Hide" : "Show"} filters</span>
-          <IoFilter />
-        </Button>
-        <Select
-          onValueChange={(value: string) =>
-            router.push(pathname + "?" + createQueryString("sort", value))
-          }
-          value={searchParams.get("sort") || "featured"}
-        >
-          <SelectTrigger className="w-[140px] border-0 shadow-none md:text-lg">
-            <SelectValue
-              placeholder="Sort by"
-              className="placeholder-text-lg"
-            />
-          </SelectTrigger>
-          <SelectContent className="border-0 shadow-none">
-            <SelectGroup>
-              {sortBy.map((element, index) => (
-                <SelectItem
-                  value={element.value}
-                  className="md:text-lg"
-                  key={index}
-                >
-                  {element.text}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+        <Drawer onOpenChange={onFilterClick}>
+          <DrawerTrigger asChild>
+            <Button
+              variant="ghost"
+              className="flex flex-row items-center gap-2 cursor-pointer md:text-lg"
+            >
+              <span>{isFilterVisible ? "Hide" : "Show"} filters</span>
+              <IoFilter />
+            </Button>
+          </DrawerTrigger>
+          <DrawerContent className="w-2/3 lg:w-1/4 h-full rounded-none flex justify-center">
+            <DrawerHeader>
+              <DrawerTitle className="text-center text-3xl">
+                Filter you items
+              </DrawerTitle>
+            </DrawerHeader>
+            <div className="p-4">
+              <FilterAccordion />
+            </div>
+            <DrawerFooter>
+              <DrawerClose></DrawerClose>
+            </DrawerFooter>
+          </DrawerContent>
+        </Drawer>
+        <Sort />
       </div>
     </div>
   );

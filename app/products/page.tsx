@@ -1,10 +1,11 @@
 import ItemsGrid from "@/components/item/items-grid";
+import { Suspense } from "react";
 
 const ProductsPage = async () => {
   return (
-    <div>
+    <Suspense fallback={<div className="text-6xl">Loading...</div>}>
       <ItemsGrid />
-    </div>
+    </Suspense>
   );
 };
 
