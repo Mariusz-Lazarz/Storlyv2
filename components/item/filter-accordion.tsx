@@ -7,6 +7,7 @@ import {
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { useCallback } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
+import DualSlider from "./dual-slider";
 
 const FilterAccordion = () => {
   const FILTERS = {
@@ -15,10 +16,10 @@ const FilterAccordion = () => {
     Category: ["equipment", "shoes", "clothing"],
   };
 
-  const searchParams = useSearchParams();
+ const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
-
+ 
   const createQueryString = useCallback(
     (name: string, value: string, checked: boolean) => {
       const params = new URLSearchParams(searchParams.toString());
@@ -95,7 +96,9 @@ const FilterAccordion = () => {
         <AccordionTrigger className="text-3xl hover:no-underline">
           Price
         </AccordionTrigger>
-        <AccordionContent></AccordionContent>
+        <AccordionContent>
+          <DualSlider />
+        </AccordionContent>
       </AccordionItem>
     </Accordion>
   );

@@ -95,11 +95,16 @@ const ItemsGrid = () => {
         onFilterClick={handleFilterClick}
       />
       {/* items grid */}
-      <div className="p-4 grid gap-4 grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-        {items.map((item) => (
-          <Item key={item.id} item={item} />
-        ))}
-      </div>
+      {items.length > 0 && (
+        <div className="p-4 grid gap-4 grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+          {items.map((item) => (
+            <Item key={item.id} item={item} />
+          ))}
+        </div>
+      )}
+      {items.length === 0 && (
+        <div className="text-center text-4xl">No items found </div>
+      )}
       <div ref={lastElementRef} />
       {isLoading && <LoadingBar />}
     </>
