@@ -5,8 +5,16 @@ import SizePicker from "./size-picker";
 import ItemHeader from "./item-header";
 import ImageCarousel from "./image-carousel";
 import { ItemProps } from "@/lib/definition";
+import AddToFav from "./add-to-fav";
+import AddToCart from "./add-to-cart";
 
-const PreviewItem = async ({ item }: { item: ItemProps }) => {
+const PreviewItem = async ({
+  item,
+  isFavorite,
+}: {
+  item: ItemProps;
+  isFavorite: boolean;
+}) => {
   return (
     <>
       <div className="md:container flex flex-col gap-10 xl:px-48 md:grid md:grid-cols-3 md:gap-6 mt-10">
@@ -20,6 +28,10 @@ const PreviewItem = async ({ item }: { item: ItemProps }) => {
             }}
           />
           <SizePicker />
+          <div className="flex flex-col gap-4">
+            <AddToCart />
+            <AddToFav itemId={item.id} initialIsFavorite={isFavorite} />
+          </div>
           <ItemInfo />
           <MostFrequentQuestions />
         </div>

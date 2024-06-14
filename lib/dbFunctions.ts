@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/db";
+import { getServerUser } from "@/utils/authUtils";
 
 export const getUserById = async (id: string) => {
   try {
@@ -18,3 +19,16 @@ export const getSingleItem = async (id: string) => {
   }
 };
 
+export const isOnFavoriteList = async (id: string) => {
+  const user = await getServerUser();
+  if (!user) return;
+
+  const isFavorite = await prisma.favorite.findFirst({
+    where: {
+      userId: user.id,
+      productId: id,
+    },
+  });
+
+  return !!isFavorite;
+};

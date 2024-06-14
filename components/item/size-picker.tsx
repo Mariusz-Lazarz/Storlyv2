@@ -2,11 +2,9 @@
 
 import { Button } from "../ui/button";
 import { useState } from "react";
-import AddToFav from "./add-to-fav";
-import AddToCart from "./add-to-cart";
 
 const SizePicker = () => {
-  const [size, setSize] = useState<string>("");
+  const [size, setSize] = useState<string>("EU 36");
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const selectedSize = (e.target as HTMLButtonElement).innerText;
@@ -34,10 +32,6 @@ const SizePicker = () => {
             </Button>
           ))}
         </div>
-      </div>
-      <div className="flex flex-col gap-4">
-        <AddToCart itemSize={size} />
-        <AddToFav />
       </div>
     </>
   );

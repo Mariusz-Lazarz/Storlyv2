@@ -4,6 +4,7 @@ import "./globals.css";
 import NavBar from "@/components/navbar/nav-bar";
 import InfoBanner from "@/components/infoBanner";
 import { SessionProvider } from "next-auth/react";
+import { Toaster } from "@/components/ui/toaster";
 import { auth } from "@/auth";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -26,6 +27,7 @@ export default async function RootLayout({
           <NavBar />
           <InfoBanner />
           {children}
+          <Toaster />
         </body>
       </html>
     </SessionProvider>

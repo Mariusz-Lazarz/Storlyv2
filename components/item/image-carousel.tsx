@@ -13,6 +13,7 @@ const ImageCarousel = ({ image }: { image: string }) => {
             height={150}
             className="md:rounded-lg"
             key={index}
+            loading="lazy"
           />
         ))}
       </div>
@@ -23,6 +24,7 @@ const ImageCarousel = ({ image }: { image: string }) => {
           style={{ objectFit: "fill" }}
           alt="image"
           className="md:rounded-lg"
+          loading="lazy"
         />
       </div>
     </div>
