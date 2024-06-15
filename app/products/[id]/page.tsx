@@ -7,8 +7,6 @@ const SingleProductPage = async ({ params }: { params: { id: string } }) => {
   const item = await getSingleItem(params.id);
   const isFavorite = await isOnFavoriteList(params.id);
   if (!item) redirect("/not-found");
-
-  console.log(item);
   return (
     <div>
       <PreviewItem item={item} isFavorite={isFavorite!} />

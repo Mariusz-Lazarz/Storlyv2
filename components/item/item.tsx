@@ -1,19 +1,9 @@
+import { ItemProps } from "@/lib/definition";
 import Image from "next/image";
 import Link from "next/link";
 
-interface ItemProp {
-  item: {
-    name: string;
-    category: string;
-    gender: string;
-    brand: string;
-    price: number;
-    image: string;
-    id: string;
-  };
-}
 
-const Item = ({ item }: ItemProp) => {
+const Item = ({ item }: { item: ItemProps }) => {
   return (
     <Link href={`/products/${item.id}`}>
       <div className="hover:cursor-pointer">

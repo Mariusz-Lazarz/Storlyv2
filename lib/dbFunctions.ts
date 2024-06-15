@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/db";
 import { getServerUser } from "@/utils/authUtils";
+import { unstable_noStore as noStore } from "next/cache";
 
 export const getUserById = async (id: string) => {
   try {
@@ -20,6 +21,7 @@ export const getSingleItem = async (id: string) => {
 };
 
 export const isOnFavoriteList = async (id: string) => {
+  noStore();
   const user = await getServerUser();
   if (!user) return;
 
@@ -31,4 +33,16 @@ export const isOnFavoriteList = async (id: string) => {
   });
 
   return !!isFavorite;
+};
+
+export const getUserFavoriteItems = async () => {
+  const user = await getServerUser();
+  if (!user) return [];
+
+  const items = await prisma.favorite.findMany({
+    where: { userId: user.id },
+    include: { product: true },
+  });
+
+  return items;
 };

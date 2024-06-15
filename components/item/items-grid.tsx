@@ -17,7 +17,6 @@ const ItemsGrid = () => {
   const [isFilterVisible, setIsFilterVisible] = useState<boolean>(false);
   const searchParams = useSearchParams();
 
-  console.log(items);
 
   const handleFilterClick = (open: boolean) => {
     setIsFilterVisible(open);
