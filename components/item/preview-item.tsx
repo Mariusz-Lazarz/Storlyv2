@@ -29,7 +29,7 @@ const PreviewItem = async ({
           />
           <SizePicker />
           <div className="flex flex-col gap-4">
-            <AddToCart />
+            <AddToCart item={item} />
             <AddToFav itemId={item.id} initialIsFavorite={isFavorite} />
           </div>
           <ItemInfo />
