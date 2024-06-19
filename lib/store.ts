@@ -9,6 +9,8 @@ interface CartItem extends ItemProps {
 interface CartStore {
   cartItems: CartItem[];
   add: (item: CartItem) => void;
+  remove: (id: string) => void;
+  changeQuantity: (id: string, quantity: number) => void;
 }
 
 const useCartStore = create<CartStore>()(
@@ -37,6 +39,23 @@ const useCartStore = create<CartStore>()(
             };
           }
         }),
+      remove: (id: string) =>
+        set((state) => ({
+          cartItems: state.cartItems.filter(
+            (itemInCart) => itemInCart.id !== id
+          ),
+        })),
+      changeQuantity: (id: string, quantity: number) =>
+        set((state) => ({
+          cartItems: state.cartItems.map((itemInCart) =>
+            itemInCart.id === id
+              ? {
+                  ...itemInCart,
+                  quantity: quantity,
+                }
+              : itemInCart
+          ),
+        })),
     }),
     {
       name: "cart",
