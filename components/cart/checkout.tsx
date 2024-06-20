@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "../ui/button";
 import useCartStore from "@/lib/store";
 import PromoCodeInput from "./promo-code-input";
 import { useState } from "react";
+import CheckoutButton from "./checkout-button";
 
 const Checkout = () => {
   const [isDiscount, setIsDiscount] = useState<number>(0);
@@ -29,7 +29,7 @@ const Checkout = () => {
       <span className="text-xl">Total: ${finalTotal.toFixed(2)}</span>
       <PromoCodeInput setDiscount={setDiscountHandler} discount={isDiscount} />
       <div className="w-full h-[1px] bg-gray-600 my-4"></div>
-      <Button className="w-full rounded-none py-6 uppercase">Checkout</Button>
+      <CheckoutButton />
     </div>
   );
 };
