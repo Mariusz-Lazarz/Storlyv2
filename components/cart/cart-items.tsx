@@ -11,6 +11,7 @@ import {
 
 const CartItems = () => {
   const cart = useCartStore((state) => state.cartItems);
+  console.log(cart);
   const remove = useCartStore((state) => state.remove);
   const changeQuantity = useCartStore((state) => state.changeQuantity);
   return (

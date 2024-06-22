@@ -4,6 +4,7 @@ export const publicRoutes = [
   "/products",
   "/not-found",
   "/api/products",
+  "/api/stripe_webhook",
 ];
 
 export const adminRoutes = ["/admin"];

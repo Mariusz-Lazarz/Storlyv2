@@ -47,6 +47,9 @@ export async function POST(request: Request) {
         "Origin"
       )}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${request.headers.get("Origin")}/canceled`,
+      metadata: {
+        userId: user.id,
+      },
     });
     return new Response(JSON.stringify({ id: session.id }), { status: 200 });
   } catch (error) {
