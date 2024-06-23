@@ -19,7 +19,7 @@ const UserButton = () => {
     return (
       <Dialog>
         <DialogTrigger>
-          <IoPersonOutline className="h-6 w-6 cursor-pointer" />
+          <IoPersonOutline className="h-[30px] w-[30px] cursor-pointer" />
         </DialogTrigger>
         <DialogContent>
           <DialogHeader className="flex gap-4">

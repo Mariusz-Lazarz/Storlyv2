@@ -14,9 +14,9 @@ const ItemsGrid = () => {
   const observer = useRef<IntersectionObserver | null>(null);
   const [hasMore, setHasMore] = useState<boolean>(true);
   const [isSticky, setIsSticky] = useState<boolean>(false);
+  const [didFetched, setDidFetched] = useState<boolean>(false);
   const [isFilterVisible, setIsFilterVisible] = useState<boolean>(false);
   const searchParams = useSearchParams();
-
 
   const handleFilterClick = (open: boolean) => {
     setIsFilterVisible(open);
@@ -45,6 +45,7 @@ const ItemsGrid = () => {
         console.error("Error fetching data:", error);
       } finally {
         setIsLoading(false);
+        setDidFetched(true);
       }
     },
     [searchParams]
@@ -101,7 +102,7 @@ const ItemsGrid = () => {
           ))}
         </div>
       )}
-      {items.length === 0 && (
+      {items.length === 0 && didFetched && (
         <div className="text-center text-4xl">No items found </div>
       )}
       <div ref={lastElementRef} />

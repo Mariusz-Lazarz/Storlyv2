@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const CanceledPage = () => {
   return (
-    <div className="flex flex-col items-center  h-screen bg-gray-100 py-20  text-center">
+    <div className="flex flex-col items-center  h-screen bg-gray-100 py-20 px-4  text-center">
       <h1 className="text-4xl font-bold text-gray-800 mb-6">
         Payment Canceled
       </h1>

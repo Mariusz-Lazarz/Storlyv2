@@ -18,7 +18,7 @@ const BurgerMenu = () => {
   const [isSecondSubMenuOpen, setIsSecondSubMenuOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] =
     useState<ProductCategory | null>(null);
-  const [gender, setGender] = useState("");
+  // const [gender, setGender] = useState("");
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -27,7 +27,6 @@ const BurgerMenu = () => {
   };
 
   const openSubMenu = (gender: string) => {
-    setGender(gender);
     setIsSubMenuOpen(true);
     setIsSecondSubMenuOpen(false);
   };
@@ -46,8 +45,14 @@ const BurgerMenu = () => {
     setIsSecondSubMenuOpen(false);
   };
 
+  const closeAll = () => {
+    setIsOpen(false);
+    setIsSubMenuOpen(false);
+    setIsSecondSubMenuOpen(false);
+  };
+
   return (
-    <div className="block md:hidden">
+    <div className="block md:hidden mr-2">
       <RxHamburgerMenu
         className="md:hidden w-6 h-6 cursor-pointer"
         onClick={toggleMenu}
@@ -120,6 +125,7 @@ const BurgerMenu = () => {
                 href="/products"
                 className="text-2xl flex items-center w-full"
                 key={`${subCategory}-${index}`}
+                onClick={closeAll}
               >
                 {subCategory}
               </Link>

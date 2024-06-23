@@ -53,6 +53,7 @@ export async function POST(request: Request) {
           data.cartItems.map((item: any) => ({
             id: item.id,
             quantity: item.quantity,
+            priceAtOrder: item.price * item.quantity,
           }))
         ),
       },

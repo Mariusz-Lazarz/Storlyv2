@@ -8,7 +8,7 @@ const SuccessPage = () => {
   const session_id = searchParams.get("session_id");
 
   return (
-    <div className="flex flex-col items-center h-screen bg-gray-100 py-20 text-center">
+    <div className="flex flex-col items-center h-screen bg-gray-100 py-20 px-4 text-center">
       <h1 className="text-4xl font-bold text-gray-800 mb-6">
         Payment Successful!
       </h1>
@@ -18,7 +18,7 @@ const SuccessPage = () => {
       </p>
       <p className="text-base text-gray-600 mb-6">
         Your session ID is{" "}
-        <span className="font-mono text-blue-600">{session_id}</span>
+        <span className="font-mono text-blue-600 break-all">{session_id}</span>
       </p>
       <div className="flex flex-row gap-2">
         <Link href="/">

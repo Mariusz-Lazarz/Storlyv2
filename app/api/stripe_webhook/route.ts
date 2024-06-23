@@ -61,7 +61,7 @@ export async function POST(request: Request) {
       JSON.parse(items).map((item: any) => {
         return prisma.orderItem.create({
           data: {
-            priceAtOrder: 20,
+            priceAtOrder: item.priceAtOrder,
             quantity: item.quantity,
             order: {
               connect: { id: order.id },

@@ -16,7 +16,7 @@ const FavouritesButton = () => {
   return (
     <>
       <Link href={"/favorite"} onClick={handleClick}>
-        <IoIosHeartEmpty className="h-6 w-6" />
+        <IoIosHeartEmpty className="h-[30px] w-[30px] cursor-pointer" />
       </Link>
     </>
   );
