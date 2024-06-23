@@ -49,6 +49,12 @@ export async function POST(request: Request) {
       cancel_url: `${request.headers.get("Origin")}/canceled`,
       metadata: {
         userId: user.id,
+        items: JSON.stringify(
+          data.cartItems.map((item: any) => ({
+            id: item.id,
+            quantity: item.quantity,
+          }))
+        ),
       },
     });
     return new Response(JSON.stringify({ id: session.id }), { status: 200 });
