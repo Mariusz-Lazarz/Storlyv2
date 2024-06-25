@@ -1,33 +1,18 @@
 import Image from "next/image";
-import { Button } from "./ui/button";
+
 import BannerImg from "@/public/banner10.webp";
-import Link from "next/link";
-import { anton } from "@/lib/fonts";
 
 const Banner = () => {
   return (
-    <>
-      <div className="w-full h-[600px] relative">
-        <Image
-          src={BannerImg}
-          alt="banner"
-          style={{ objectFit: "fill", objectPosition: "center" }}
-          fill
-          priority
-        />
-      </div>
-      <div className="flex justify-center flex-col items-center p-2">
-        <h1 className={`${anton.className} text-6xl md:text-9xl uppercase`}>
-          Gear Up
-        </h1>
-        <p className="md:text-lg font-bold my-4 text-center">
-          Shop the latest sportswear and equipment at unbeatable prices.
-        </p>
-        <Link href="/products">
-          <Button className="rounded-full">Browse</Button>
-        </Link>
-      </div>
-    </>
+    <div className="w-full h-[650px] relative">
+      <Image
+        src="https://images.unsplash.com/flagged/photo-1565106305412-e8cab493e15e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        alt="banner"
+        style={{ objectFit: "fill", objectPosition: "center" }}
+        fill
+        priority
+      />
+    </div>
   );
 };
 

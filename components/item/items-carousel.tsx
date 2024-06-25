@@ -17,15 +17,15 @@ interface ItemsCarouselProps {
   variant: "horizontal" | "vertical";
 }
 
-const horizontal = "h-[250px] md:h-[300px]";
+const horizontal = "h-[250px] md:h-[400px]";
 const vertical = "h-[450px] md:h-[550px]";
 
 const ItemsCarousel = ({ title, items, variant }: ItemsCarouselProps) => {
   return (
-    <div className="w-full max-w-full flex justify-center items-center p-2 mt-20">
+    <div className="w-full max-w-full flex justify-center items-center px-2 md:px-16  mt-10">
       <Carousel className="my-12 relative w-screen">
         <div className="absolute flex -top-2 left-0  space-x-2 transform -translate-y-full">
-          <h1 className={`${anton.className} text-5xl`}>{title}</h1>
+          <h1 className={`${anton.className} text-5xl uppercase`}>{title}</h1>
         </div>
         <div className="absolute hidden md:flex -top-5 right-14  space-x-2 transform -translate-y-full">
           <CarouselPrevious />
@@ -51,7 +51,7 @@ const ItemsCarousel = ({ title, items, variant }: ItemsCarouselProps) => {
                 />
                 <Link href={item.id ? `/products/${item.id}` : "/products"}>
                   <Button
-                    className="absolute left-10 bottom-10 rounded-full"
+                    className="absolute left-10 bottom-10 rounded-full font-bold"
                     variant="secondary"
                   >
                     {item.category ? item.category : "Discover"}

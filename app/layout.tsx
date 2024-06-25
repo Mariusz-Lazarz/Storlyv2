@@ -6,6 +6,7 @@ import InfoBanner from "@/components/infoBanner";
 import { SessionProvider } from "next-auth/react";
 import { Toaster } from "@/components/ui/toaster";
 import { auth } from "@/auth";
+import Footer from "@/components/footer/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,6 +29,7 @@ export default async function RootLayout({
           <InfoBanner />
           {children}
           <Toaster />
+          <Footer />
         </body>
       </html>
     </SessionProvider>

@@ -47,8 +47,9 @@ const NavBar = () => {
         </div>
         <div className="flex-1 flex justify-end items-center space-x-2">
           <SearchBar />
-          <UserButton />
+
           <CartButton />
+          <UserButton />
           <FavouritesButton />
         </div>
       </nav>

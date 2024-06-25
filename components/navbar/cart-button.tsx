@@ -40,7 +40,7 @@ const CartButton = () => {
       <Link href={"/cart"}>
         <div className={`relative ${animate ? "animate-ping" : ""}`}>
           <IoBagOutline
-            className={`h-[30px] w-[30px] cursor-pointer `}
+            className={`h-[26px] w-[26px] cursor-pointer `}
             onClick={handleClick}
           />
           {cartItemCount > 0 && (
