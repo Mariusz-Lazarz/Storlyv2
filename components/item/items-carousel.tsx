@@ -47,6 +47,7 @@ const ItemsCarousel = ({ title, items, variant }: ItemsCarouselProps) => {
                   src={item.image}
                   alt={`Carousel image ${index}`}
                   style={{ objectFit: "fill" }}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
                 <Link href={item.id ? `/products/${item.id}` : "/products"}>
                   <Button

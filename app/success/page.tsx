@@ -2,10 +2,17 @@
 import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useEffect } from "react";
+import useCartStore from "@/lib/store";
 
 const SuccessPage = () => {
   const searchParams = useSearchParams();
   const session_id = searchParams.get("session_id");
+  const clearCart = useCartStore((state) => state.clear);
+
+  useEffect(() => {
+    clearCart();
+  }, [clearCart]);
 
   return (
     <div className="flex flex-col items-center h-screen bg-gray-100 py-20 px-4 text-center">

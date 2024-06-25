@@ -10,6 +10,7 @@ interface CartStore {
   cartItems: CartItem[];
   add: (item: CartItem) => void;
   remove: (id: string) => void;
+  clear: () => void;
   changeQuantity: (id: string, quantity: number) => void;
 }
 
@@ -56,6 +57,7 @@ const useCartStore = create<CartStore>()(
               : itemInCart
           ),
         })),
+      clear: () => set({ cartItems: [] }),
     }),
     {
       name: "cart",
