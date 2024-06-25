@@ -36,9 +36,6 @@ const PreviewItem = async ({
           <MostFrequentQuestions />
         </div>
       </div>
-      <div className="p-2">
-        <ItemsCarousel title="You might also like these " />
-      </div>
     </>
   );
 };

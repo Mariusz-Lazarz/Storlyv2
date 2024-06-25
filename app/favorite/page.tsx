@@ -11,6 +11,7 @@ const FavoritePage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const observer = useRef<IntersectionObserver | null>(null);
   const [hasMore, setHasMore] = useState<boolean>(true);
+  const [didFetched, setDidFetched] = useState<boolean>(false);
 
   const loadItems = useCallback(async (currentPage: number) => {
     setIsLoading(true);
@@ -32,6 +33,7 @@ const FavoritePage = () => {
       console.error("Error fetching data:", error);
     } finally {
       setIsLoading(false);
+      setDidFetched(true);
     }
   }, []);
 
@@ -67,7 +69,7 @@ const FavoritePage = () => {
           ))}
         </div>
       )}
-      {items.length === 0 && (
+      {items.length === 0 && didFetched && (
         <div className="text-center text-4xl mt-10">No items found </div>
       )}
       <div ref={lastElementRef} />

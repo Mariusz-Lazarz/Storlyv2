@@ -9,41 +9,51 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Link from "next/link";
+import { anton } from "@/lib/fonts";
 
 interface ItemsCarouselProps {
   title: string;
+  items: { image: string; category?: string; id?: string }[];
+  variant: "horizontal" | "vertical";
 }
 
-const ItemsCarousel = ({ title }: ItemsCarouselProps) => {
+const horizontal = "h-[250px] md:h-[300px]";
+const vertical = "h-[450px] md:h-[550px]";
+
+const ItemsCarousel = ({ title, items, variant }: ItemsCarouselProps) => {
   return (
-    <div className="w-full max-w-full flex justify-center items-center p-2">
+    <div className="w-full max-w-full flex justify-center items-center p-2 mt-20">
       <Carousel className="my-12 relative w-screen">
         <div className="absolute flex -top-2 left-0  space-x-2 transform -translate-y-full">
-          <h1 className="font-semibold text-3xl">{title}</h1>
+          <h1 className={`${anton.className} text-5xl`}>{title}</h1>
         </div>
         <div className="absolute hidden md:flex -top-5 right-14  space-x-2 transform -translate-y-full">
           <CarouselPrevious />
           <CarouselNext />
         </div>
-        <CarouselContent className="p-2 md:p-0 ">
-          {Array.from({ length: 10 }).map((_, index) => (
+        <CarouselContent>
+          {items.map((item, index) => (
             <CarouselItem
               key={index}
               className="flex-shrink-0 basis-[85%] sm:basis-[70%] md:basis-1/2 lg:basis-1/3 p-2"
             >
-              <div className="relative w-full h-[450px] md:h-[500px]">
+              <div
+                className={`relative w-full ${
+                  variant === "horizontal" ? horizontal : vertical
+                }`}
+              >
                 <Image
                   fill
-                  src="https://images.unsplash.com/photo-1622470953794-aa9c70b0fb9d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHQlMjBzaGlydHxlbnwwfHwwfHx8MA%3D%3D"
+                  src={item.image}
                   alt={`Carousel image ${index}`}
                   style={{ objectFit: "fill" }}
                 />
-                <Link href="/airforce">
+                <Link href={item.id ? `/products/${item.id}` : "/products"}>
                   <Button
                     className="absolute left-10 bottom-10 rounded-full"
                     variant="secondary"
                   >
-                    Air force 1
+                    {item.category ? item.category : "Discover"}
                   </Button>
                 </Link>
               </div>
