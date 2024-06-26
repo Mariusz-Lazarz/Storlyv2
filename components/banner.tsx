@@ -1,7 +1,5 @@
 import Image from "next/image";
 
-import BannerImg from "@/public/banner10.webp";
-
 const Banner = () => {
   return (
     <div className="w-full h-[650px] relative">

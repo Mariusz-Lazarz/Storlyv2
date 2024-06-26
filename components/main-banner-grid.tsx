@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Button } from "./ui/button";
+import Link from "next/link";
 
 interface MainBannerGridProps {
   items: {
@@ -30,9 +31,11 @@ const MainBannerGrid = ({ items }: MainBannerGridProps) => {
                 {item.title}
               </h1>
             </div>
-            <Button variant="secondary" className="rounded-full mt-4">
-              Shop
-            </Button>
+            <Link href="/products">
+              <Button variant="secondary" className="rounded-full mt-4">
+                Shop
+              </Button>
+            </Link>
           </div>
         </div>
       ))}

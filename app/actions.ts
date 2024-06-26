@@ -1,6 +1,8 @@
 "use server";
 import { prisma } from "@/lib/db";
 import { getServerUser } from "@/utils/authUtils";
+import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 export const addToFavorites = async (itemId: string) => {
   const user = await getServerUser();
@@ -30,6 +32,7 @@ export const addToFavorites = async (itemId: string) => {
       },
     },
   });
+  revalidatePath("/favorite");
 };
 
 export const deleteFromFavorites = async (id: string) => {
@@ -49,6 +52,8 @@ export const deleteFromFavorites = async (id: string) => {
       id: existingFavItem.id,
     },
   });
+  revalidatePath("/favorite");
+  revalidatePath(`/products/${id}`);
 };
 
 export const getRecommendedItems = async (category: string, id: string) => {
