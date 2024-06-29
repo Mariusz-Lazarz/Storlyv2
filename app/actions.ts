@@ -119,3 +119,26 @@ export const getUserFavoriteItems = async () => {
 
   return items;
 };
+
+export const getUserOrders = async () => {
+  const user = await getServerUser();
+  if (!user) return;
+
+  const orders = await prisma.order.findMany({
+    where: { userId: user.id },
+    include: {
+      orderItems: {
+        include: {
+          product: {
+            select: {
+              name: true,
+            },
+          },
+        },
+      },
+    },
+    take: 10,
+  });
+
+  return orders;
+};

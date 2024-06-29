@@ -29,7 +29,7 @@ const Checkout = () => {
       <span className="text-xl">Total: ${finalTotal.toFixed(2)}</span>
       <PromoCodeInput setDiscount={setDiscountHandler} discount={isDiscount} />
       <div className="w-full h-[1px] bg-gray-600 my-4"></div>
-      <CheckoutButton />
+      <CheckoutButton deliveryFee={deliveryFee} discount={discount} />
     </div>
   );
 };

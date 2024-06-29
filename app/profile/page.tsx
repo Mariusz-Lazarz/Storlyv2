@@ -1,13 +1,14 @@
 import { getServerUser } from "@/utils/authUtils";
 import { signOut } from "@/auth";
 import { Button } from "@/components/ui/button";
-import { auth } from "@/auth";
+import { revalidatePath } from "next/cache";
+import OrdersTable from "@/components/profile/orders-table";
+import { Suspense } from "react";
 
 const SettingsPage = async () => {
   const user = await getServerUser();
-  const session = await auth();
   return (
-    <div className="container p-20">
+    <div className="p-4 md:p-20">
       <div className="flex gap-4 flex-col">
         <div className="flex flex-row items-center justify-between">
           <span className="text-3xl font-semibold uppercase">
@@ -16,7 +17,8 @@ const SettingsPage = async () => {
           <form
             action={async () => {
               "use server";
-              await signOut();
+              await signOut({ redirectTo: "/", redirect: true });
+              revalidatePath("/", "layout");
             }}
           >
             <Button type="submit">Sign out</Button>
@@ -27,7 +29,11 @@ const SettingsPage = async () => {
           <span className="text-lg uppercase">{user?.email}</span>
         </div>
       </div>
-      <div>{JSON.stringify(session)}</div>
+      <div className="mt-10">
+        <Suspense fallback={<div>Loading...</div>}>
+          <OrdersTable />
+        </Suspense>
+      </div>
     </div>
   );
 };

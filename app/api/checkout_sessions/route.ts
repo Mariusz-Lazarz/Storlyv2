@@ -16,6 +16,8 @@ export async function POST(request: Request) {
 
   const data = await request.json();
 
+  console.log(typeof data.discount);
+
   if (
     !data ||
     !data.cartItems ||
@@ -31,17 +33,31 @@ export async function POST(request: Request) {
   try {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
-      line_items: data.cartItems.map((item: any) => ({
-        price_data: {
-          currency: "usd",
-          product_data: {
-            name: item.name,
-            images: [item.image],
+      line_items: [
+        ...data.cartItems.map((item: any) => ({
+          price_data: {
+            currency: "usd",
+            product_data: {
+              name: item.name,
+              images: [item.image],
+            },
+            unit_amount: item.price * 100,
           },
-          unit_amount: item.price * 100,
+          quantity: item.quantity,
+        })),
+        {
+          price_data: {
+            currency: "usd",
+            product_data: {
+              name: "Shipping",
+              images: ["https://example.com/shipping-icon.png"],
+            },
+            unit_amount: data.deliveryFee * 100,
+          },
+          quantity: 1,
         },
-        quantity: item.quantity,
-      })),
+      ],
+      ...(data.discount ? { discounts: [{ coupon: "d9PdCdZh" }] } : {}),
       mode: "payment",
       success_url: `${request.headers.get(
         "Origin"

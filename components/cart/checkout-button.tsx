@@ -4,7 +4,13 @@ import axios from "axios";
 import getStripe from "@/utils/get-stripejs";
 import { useState } from "react";
 
-const CheckoutButton = () => {
+const CheckoutButton = ({
+  deliveryFee,
+  discount,
+}: {
+  deliveryFee: number;
+  discount: number;
+}) => {
   const [loading, setLoading] = useState<boolean>(false);
   const cartItems = useCartStore((state) => state.cartItems);
 
@@ -13,6 +19,8 @@ const CheckoutButton = () => {
     try {
       const response = await axios.post("/api/checkout_sessions", {
         cartItems,
+        deliveryFee,
+        discount,
       });
       const checkoutId = response.data.id;
       const stripe = await getStripe();
