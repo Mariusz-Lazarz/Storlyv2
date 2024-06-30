@@ -50,7 +50,9 @@ export async function POST(request: Request) {
             currency: "usd",
             product_data: {
               name: "Shipping",
-              images: ["https://example.com/shipping-icon.png"],
+              images: [
+                "https://images.unsplash.com/photo-1618381297523-e6c0ab13a5b2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+              ],
             },
             unit_amount: data.deliveryFee * 100,
           },

@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { revalidatePath } from "next/cache";
 import OrdersTable from "@/components/profile/orders-table";
 import { Suspense } from "react";
+import OrdersSekleton from "@/components/profile/orders-skeleton";
 
 const SettingsPage = async () => {
   const user = await getServerUser();
@@ -30,7 +31,7 @@ const SettingsPage = async () => {
         </div>
       </div>
       <div className="mt-10">
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<OrdersSekleton />}>
           <OrdersTable />
         </Suspense>
       </div>

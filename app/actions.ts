@@ -1,7 +1,6 @@
 "use server";
 import { prisma } from "@/lib/db";
 import { getServerUser } from "@/utils/authUtils";
-import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
 export const addToFavorites = async (itemId: string) => {
