@@ -31,7 +31,7 @@ const SuccessPage = () => {
         <Link href="/">
           <Button className="py-6">Return to home</Button>
         </Link>
-        <Link href={`/order-details?session_id=${session_id}`}>
+        <Link href={`/profile`}>
           <Button className="py-6" variant="outline">
             View Order Details
           </Button>

@@ -5,6 +5,9 @@ import { revalidatePath } from "next/cache";
 import OrdersTable from "@/components/profile/orders-table";
 import { Suspense } from "react";
 import OrdersSekleton from "@/components/profile/orders-skeleton";
+import Link from "next/link";
+import { LiaSignOutAltSolid } from "react-icons/lia";
+import { MdOutlineAdminPanelSettings } from "react-icons/md";
 
 const SettingsPage = async () => {
   const user = await getServerUser();
@@ -15,15 +18,28 @@ const SettingsPage = async () => {
           <span className="text-3xl font-semibold uppercase">
             HELLO {user?.name?.split(" ")[0]}
           </span>
-          <form
-            action={async () => {
-              "use server";
-              await signOut({ redirectTo: "/", redirect: true });
-              revalidatePath("/", "layout");
-            }}
-          >
-            <Button type="submit">Sign out</Button>
-          </form>
+          <div className="flex gap-2">
+            <form
+              action={async () => {
+                "use server";
+                await signOut({ redirectTo: "/", redirect: true });
+                revalidatePath("/", "layout");
+              }}
+            >
+              <Button type="submit" className="hidden md:block">
+                Sign out
+              </Button>
+              <Button type="submit" size="icon" className=" md:hidden">
+                <LiaSignOutAltSolid className="h-6 w-6" />
+              </Button>
+            </form>
+            <Link href="/admin">
+              <Button className="hidden md:block">Admin Panel</Button>
+              <Button size="icon" className=" md:hidden">
+                <MdOutlineAdminPanelSettings className="h-6 w-6" />
+              </Button>
+            </Link>
+          </div>
         </div>
         <div className="flex flex-col">
           <span className="text-2xl font-semibold uppercase">Email:</span>

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { anton } from "@/lib/fonts";
 
-const MainLogo = ({ isSticky }: { isSticky: boolean }) => {
+const MainLogo = ({ isSticky }: { isSticky?: boolean }) => {
   return (
     <Link href="/">
       <h1

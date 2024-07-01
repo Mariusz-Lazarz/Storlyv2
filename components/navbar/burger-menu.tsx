@@ -6,6 +6,7 @@ import { Cross1Icon } from "@radix-ui/react-icons";
 import { TfiAngleRight, TfiAngleLeft } from "react-icons/tfi";
 import Link from "next/link";
 import { GENDER_CATEGORIES, PRODUCT_CATEGORIES } from "@/lib/variables";
+import MainLogo from "./logo";
 
 type ProductCategory = {
   category: string;
@@ -62,6 +63,7 @@ const BurgerMenu = () => {
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
+        <MainLogo />
         <Cross1Icon
           className="w-6 h-6 cursor-pointer ml-auto"
           onClick={toggleMenu}
