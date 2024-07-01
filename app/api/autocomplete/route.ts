@@ -16,22 +16,26 @@ export async function POST(request: Request) {
         OR: [
           {
             name: {
-              search: query,
+              contains: query,
+              mode: "insensitive",
             },
           },
           {
             category: {
-              search: query,
+              contains: query,
+              mode: "insensitive",
             },
           },
           {
             brand: {
-              search: query,
+              contains: query,
+              mode: "insensitive",
             },
           },
           {
             gender: {
-              search: query,
+              contains: query,
+              mode: "insensitive",
             },
           },
         ],

@@ -60,6 +60,8 @@ const SearchBar = () => {
     }
   };
 
+  
+
   return (
     <div className="relative" ref={wrapperRef}>
       <Input
