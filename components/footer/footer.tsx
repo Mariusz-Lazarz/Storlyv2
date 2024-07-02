@@ -63,7 +63,7 @@ const footerSections = [
 
 const Footer = () => {
   return (
-    <div className="px-2 md:px-16 py-16">
+    <div >
       <div className="w-full h-[1px] bg-gray-600 my-4"></div>
       <div className="hidden md:flex flex-row justify-between p-4">
         {footerSections.map((section, index) => (
