@@ -3,7 +3,7 @@ import Checkout from "@/components/cart/checkout";
 
 const CartPage = () => {
   return (
-    <div className="container grid md:grid-flow-col md:grid-cols-6 gap-10 p-6">
+    <div className="container grid md:grid-flow-col md:grid-cols-6 gap-10 p-2">
       <div className="md:col-span-4">
         <CartItems />
       </div>

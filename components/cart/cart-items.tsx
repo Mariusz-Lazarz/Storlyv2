@@ -16,7 +16,7 @@ const CartItems = () => {
   const remove = useCartStore((state) => state.remove);
   const changeQuantity = useCartStore((state) => state.changeQuantity);
   return (
-    <div>
+    <div className="w-full">
       <h1 className="text-3xl font-semibold">My Bag</h1>
       <div className="w-full h-[1px] bg-gray-600 my-4"></div>
       <div className="flex flex-col gap-4 w-full h-[800px] overflow-auto">
