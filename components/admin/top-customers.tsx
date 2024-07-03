@@ -28,14 +28,16 @@ const Customers = async () => {
     <>
       {customers.map((customer, index) => (
         <div className="flex gap-4" key={index}>
-          <div className="relative w-12 h-12">
-            <Image
-              src={customer.image!}
-              alt={customer.name!}
-              fill
-              className="rounded-full"
-              loading="lazy"
-            />
+          <div className="w-16 h-16 flex-shrink-0">
+            <div className="relative w-full h-full rounded-full">
+              <Image
+                src={customer.image!}
+                alt={customer.name!}
+                fill
+                className="rounded-full"
+                loading="lazy"
+              />
+            </div>
           </div>
           <div className="flex flex-row w-full justify-between">
             <div className="flex flex-col">

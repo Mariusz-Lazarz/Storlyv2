@@ -4,14 +4,15 @@ import Link from "next/link";
 
 const AdminNav = () => {
   return (
-    <div className="bg-black p-4 text-white flex justify-between items-center">
-      <div className="text-center">
+    <div className="bg-black p-4 text-white flex flex-col">
+      <div>
         <MainLogo />
       </div>
-      <div>
+      <div className="mt-10">
+        <span className="uppercase p-2">General</span>
         <Link
           href="/admin/dashboard"
-          className="w-full rounded-md hover:bg-gray-700 p-2 flex items-center gap-2"
+          className="w-full rounded-md hover:bg-gray-700 p-2 flex gap-2"
         >
           <RxDashboard className="h-6 w-6" />
           <span>Dashboard</span>

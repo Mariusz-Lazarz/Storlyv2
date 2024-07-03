@@ -24,13 +24,16 @@ const Products = async () => {
     <>
       {products.map((product) => (
         <div className="flex gap-4" key={product.id}>
-          <div className="relative w-24 h-20">
-            <Image
-              src={product.image!}
-              alt={product.name!}
-              fill
-              className="rounded-md"
-            />
+          <div className="w-16 h-16 flex-shrink-0">
+            <div className="relative w-full h-full">
+              <Image
+                src={product.image!}
+                alt={product.name!}
+                fill
+                className="rounded-md"
+                loading="lazy"
+              />
+            </div>
           </div>
           <div className="flex flex-row w-full justify-between">
             <div className="flex flex-col">

@@ -41,7 +41,7 @@ const Orders = async () => {
   return (
     <>
       {orders.map((order) => (
-        <div className="grid grid-cols-5 items-center gap-4"  key={order.id}>
+        <div className="grid grid-cols-5 items-center gap-4" key={order.id}>
           <div className="flex flex-row items-center gap-2">
             <div className="relative w-10 h-10">
               <Image
@@ -53,7 +53,7 @@ const Orders = async () => {
             </div>
             <span>{order.user.name}</span>
           </div>
-          <span className="text-center">{order.id}</span>
+          <span className="text-center truncate">{order.id}</span>
           <span className="text-center">{order.status}</span>
           <span className="text-center">{formatDate(order.createdAt)}</span>
           <span className="text-center">

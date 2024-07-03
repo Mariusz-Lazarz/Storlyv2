@@ -4,10 +4,10 @@ import { Button } from "@/components/ui/button";
 import { revalidatePath } from "next/cache";
 import OrdersTable from "@/components/profile/orders-table";
 import { Suspense } from "react";
-import OrdersSekleton from "@/components/profile/orders-skeleton";
 import Link from "next/link";
 import { LiaSignOutAltSolid } from "react-icons/lia";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
+import LoadingSpinner from "@/components/admin/loading-spinner";
 
 const SettingsPage = async () => {
   const user = await getServerUser();
@@ -47,7 +47,7 @@ const SettingsPage = async () => {
         </div>
       </div>
       <div className="mt-10">
-        <Suspense fallback={<OrdersSekleton />}>
+        <Suspense fallback={<LoadingSpinner />}>
           <OrdersTable />
         </Suspense>
       </div>

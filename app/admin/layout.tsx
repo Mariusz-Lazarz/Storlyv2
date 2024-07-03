@@ -6,7 +6,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-row h-screen">
       <AdminNav />
       <div className="w-full p-6">{children}</div>
     </div>
