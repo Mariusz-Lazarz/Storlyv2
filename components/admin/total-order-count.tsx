@@ -1,15 +1,16 @@
 import { getTotalOrders } from "@/app/admin/action";
 import { Suspense } from "react";
 import LoadingSpinner from "./loading-spinner";
+import { anton } from "@/lib/fonts";
 
 const TotalOrderCount = () => {
   return (
     <div className="p-4 flex flex-col gap-4 h-full text-center">
-      <span className="text-2xl">Total Oders</span>
+      <span className={`text-2xl ${anton.className}`}>Total Oders</span>
       <Suspense fallback={<LoadingSpinner />}>
         <OrderCount />
         <span className="mt-auto text-green-500">
-          +28% <span className="text-white">compared to next week</span>
+          +28% <span className="text-gray-500">compared to next week</span>
         </span>
       </Suspense>
     </div>

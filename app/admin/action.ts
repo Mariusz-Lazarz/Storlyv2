@@ -35,6 +35,11 @@ export const getTotalOrders = async () => {
 
 export const getTopCustomers = async () => {
   const customers = await prisma.user.findMany({
+    where: {
+      orders: {
+        some: {},
+      },
+    },
     orderBy: {
       orders: {
         _count: "desc",
@@ -51,4 +56,67 @@ export const getTopCustomers = async () => {
   });
 
   return customers;
+};
+
+export const getRecentOrders = async () => {
+  const orders = await prisma.order.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+    select: {
+      id: true,
+      createdAt: true,
+      total: true,
+      status: true,
+      user: {
+        select: {
+          name: true,
+          image: true,
+        },
+      },
+    },
+    take: 10,
+  });
+
+  return orders;
+};
+
+export const getMostSellingProducts = async () => {
+  const topProducts = await prisma.orderItem.groupBy({
+    by: ["productId"],
+    _sum: {
+      quantity: true,
+    },
+    orderBy: {
+      _sum: {
+        quantity: "desc",
+      },
+    },
+    take: 5,
+  });
+
+  const productIds = topProducts.map((tp) => tp.productId);
+
+  const products = await prisma.product.findMany({
+    where: {
+      id: {
+        in: productIds,
+      },
+    },
+    select: {
+      id: true,
+      name: true,
+      image: true,
+    },
+  });
+
+  return topProducts.map((tp) => {
+    const product = products.find((p) => p.id === tp.productId);
+    return {
+      name: product?.name,
+      image: product?.image,
+      totalQuantity: tp._sum.quantity,
+      id: product?.id,
+    };
+  });
 };

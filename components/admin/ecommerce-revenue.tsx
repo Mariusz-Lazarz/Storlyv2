@@ -1,15 +1,16 @@
 import { getTotalRevenue } from "@/app/admin/action";
 import { Suspense } from "react";
 import LoadingSpinner from "./loading-spinner";
+import { anton } from "@/lib/fonts";
 
 const EcommerceRevenue = async () => {
   return (
     <div className="p-4 flex flex-col gap-4 h-full text-center">
-      <span className="text-2xl">Ecommerce Revenue</span>
+      <span className={`text-2xl ${anton.className}`}>Ecommerce Revenue</span>
       <Suspense fallback={<LoadingSpinner />}>
         <TotalRevenue />
         <span className="mt-auto text-green-500">
-          +18% <span className="text-white">compared to next week</span>
+          +18% <span className="text-gray-500">compared to next week</span>
         </span>
       </Suspense>
     </div>

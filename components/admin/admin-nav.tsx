@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const AdminNav = () => {
   return (
-    <div className="bg-gray-800 p-4 text-white flex justify-between items-center">
+    <div className="bg-black p-4 text-white flex justify-between items-center">
       <div className="text-center">
         <MainLogo />
       </div>
