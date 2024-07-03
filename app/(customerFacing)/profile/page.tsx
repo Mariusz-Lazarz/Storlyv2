@@ -33,7 +33,7 @@ const SettingsPage = async () => {
                 <LiaSignOutAltSolid className="h-6 w-6" />
               </Button>
             </form>
-            <Link href="/admin">
+            <Link href="/admin/dashboard">
               <Button className="hidden md:block">Admin Panel</Button>
               <Button size="icon" className=" md:hidden">
                 <MdOutlineAdminPanelSettings className="h-6 w-6" />

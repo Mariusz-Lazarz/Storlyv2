@@ -32,3 +32,23 @@ export const getTotalOrders = async () => {
 
   return orderCount;
 };
+
+export const getTopCustomers = async () => {
+  const customers = await prisma.user.findMany({
+    orderBy: {
+      orders: {
+        _count: "desc",
+      },
+    },
+    select: {
+      name: true,
+      image: true,
+      _count: {
+        select: { orders: true },
+      },
+    },
+    take: 5,
+  });
+
+  return customers;
+};

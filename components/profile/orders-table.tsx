@@ -20,7 +20,6 @@ import { getUserOrders } from "@/app/actions";
 const OrdersTable = async () => {
   const orders = await getUserOrders();
   if (!orders) return;
-  console.log(orders);
 
   const ordersTotal = orders.reduce((acc, cur) => acc + cur.total!, 0);
 

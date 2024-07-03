@@ -1,34 +1,52 @@
+import { getTopCustomers } from "@/app/admin/action";
 import Image from "next/image";
+import { Suspense } from "react";
+import LoadingSpinner from "./loading-spinner";
 
-const TopCustomers = () => {
+const TopCustomers = async () => {
   return (
     <div className="p-6">
       <div className="text-center">
         <span className="text-2xl">Top Customers</span>
       </div>
       <div className="mt-10 flex flex-col gap-4">
-        {/* Start of item */}
-        <div className="flex gap-4">
-          <div className="relative w-20 h-16">
-            <Image
-              src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt="product"
-              fill
-              className="rounded-full"
-            />
-          </div>
-          <div className="flex flex-row w-full justify-between">
-            <div className="flex flex-col">
-              <span className="text-xl">Jenna Ortega</span>
-              <span className="font-semibold">
-                15<span className="opacity-50 ml-1">Orders</span>
-              </span>
-            </div>
-          </div>
-        </div>
+        <Suspense fallback={<LoadingSpinner />}>
+          <Customers />
+        </Suspense>
       </div>
     </div>
   );
 };
 
+const Customers = async () => {
+  const customers = await getTopCustomers();
+  if (!customers) return <div>Internal server error!</div>;
+
+  return (
+    <>
+      {customers.map((customer, index) => (
+        <div className="flex gap-4" key={index}>
+          <div className="relative w-20 h-16">
+            <Image
+              src={customer.image!}
+              alt={customer.name!}
+              fill
+              className="rounded-full"
+              loading="lazy"
+            />
+          </div>
+          <div className="flex flex-row w-full justify-between">
+            <div className="flex flex-col">
+              <span className="text-xl">{customer.name}</span>
+              <span className="font-semibold">
+                {customer._count.orders}
+                <span className="opacity-50 ml-1">Orders</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </>
+  );
+};
 export default TopCustomers;

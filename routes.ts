@@ -6,7 +6,6 @@ export const publicRoutes = [
   "/api/products",
   "/api/stripe_webhook",
   "/api/autocomplete",
-  "/admin",
 ];
 
 export const adminRoutes = [""];
