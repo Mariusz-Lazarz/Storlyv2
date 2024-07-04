@@ -2,17 +2,14 @@ import TableSearchNav from "@/components/admin/table-search-nav";
 import TablePagination from "@/components/admin/table-pagination";
 import TableBody from "@/components/admin/table-body";
 
-const AdminUsersPage = () => {
+const AdminProductPage = () => {
   return (
     <div className="w-full h-full border-[0.5px] border-slate-300 rounded-lg shadow-lg flex flex-col">
-      <TableSearchNav
-        label="users"
-        placeholder="Search by name or email..."
-      />
-      <TableBody navLabels={["name", "email", "role", "signed up"]} />
+      <TableSearchNav label="products" placeholder="Search by name or id..." />
+      <TableBody navLabels={["id", "name", "category", "price"]} />
       <TablePagination />
     </div>
   );
 };
 
-export default AdminUsersPage;
+export default AdminProductPage;

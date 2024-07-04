@@ -59,7 +59,10 @@ const AdminNav = () => {
           </Link>
         ))}
       </div>
-      <div></div>
+      <div className="mt-auto">
+        ⓘ Admin dashboard is not designed to be responsive due to large
+        components ⓘ
+      </div>
     </div>
   );
 };
