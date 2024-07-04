@@ -11,7 +11,7 @@ const MostSellingProducts = async () => {
           Most Selling Products
         </span>
       </div>
-      <div className="mt-10 flex flex-col gap-4">
+      <div className="mt-4 flex flex-col gap-4">
         <Products />
       </div>
     </div>

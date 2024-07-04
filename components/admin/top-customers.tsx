@@ -11,7 +11,7 @@ const TopCustomers = async () => {
       <div className="text-center">
         <span className={`text-2xl ${anton.className}`}>Top Customers</span>
       </div>
-      <div className="mt-10 flex flex-col gap-4">
+      <div className="mt-4 flex flex-col gap-4">
         <Suspense fallback={<LoadingSpinner />}>
           <Customers />
         </Suspense>

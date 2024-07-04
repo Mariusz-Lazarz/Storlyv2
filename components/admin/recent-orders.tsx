@@ -20,7 +20,7 @@ const RecentOrders = async () => {
       <div className="text-center mb-4">
         <span className={`text-2xl ${anton.className}`}>Recent Orders</span>
       </div>
-      <div className="grid grid-cols-5 text-center font-semibold my-10">
+      <div className="grid grid-cols-5 text-center font-semibold my-4">
         <span>Customer</span>
         <span>Order ID</span>
         <span>Status</span>
