@@ -42,7 +42,7 @@ const AdminNav = () => {
   ];
 
   return (
-    <div className="bg-black p-4 text-white flex flex-col">
+    <div className="bg-black p-4 text-white flex flex-col w-2/12">
       <div>
         <MainLogo />
       </div>

@@ -1,13 +1,13 @@
 import { getServerUser } from "@/utils/authUtils";
-import { signOut } from "@/auth";
 import { Button } from "@/components/ui/button";
-import { revalidatePath } from "next/cache";
+
 import OrdersTable from "@/components/profile/orders-table";
 import { Suspense } from "react";
 import Link from "next/link";
-import { LiaSignOutAltSolid } from "react-icons/lia";
+
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import LoadingSpinner from "@/components/admin/loading-spinner";
+import SignOutButton from "@/components/profile/sing-out-button";
 
 const SettingsPage = async () => {
   const user = await getServerUser();
@@ -19,20 +19,7 @@ const SettingsPage = async () => {
             HELLO {user?.name?.split(" ")[0]}
           </span>
           <div className="flex gap-2">
-            <form
-              action={async () => {
-                "use server";
-                await signOut({ redirectTo: "/", redirect: true });
-                revalidatePath("/", "layout");
-              }}
-            >
-              <Button type="submit" className="hidden md:block">
-                Sign out
-              </Button>
-              <Button type="submit" size="icon" className=" md:hidden">
-                <LiaSignOutAltSolid className="h-6 w-6" />
-              </Button>
-            </form>
+            <SignOutButton />
             <Link href="/admin/dashboard">
               <Button className="hidden md:block">Admin Panel</Button>
               <Button size="icon" className=" md:hidden">

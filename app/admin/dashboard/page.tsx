@@ -6,7 +6,7 @@ import TopCustomers from "@/components/admin/top-customers";
 import RecentOrders from "@/components/admin/recent-orders";
 const AdminDashboardPage = () => {
   return (
-    <div className="grid grid-cols-5 grid-rows-4 gap-4">
+    <div className="grid grid-cols-5 grid-rows-4 gap-4 h-full">
       <div className="bg-white border-[0.5px] shadow-lg rounded-lg col-span-1 row-span-1 overflow-auto">
         <EcommerceRevenue />
       </div>

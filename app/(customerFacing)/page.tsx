@@ -1,7 +1,5 @@
 import Banner from "@/components/banner";
 import ItemsCarousel from "@/components/item/items-carousel";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import MainBannerHead from "@/components/main-banner-head";
 import MainBannerGrid from "@/components/main-banner-grid";
 
