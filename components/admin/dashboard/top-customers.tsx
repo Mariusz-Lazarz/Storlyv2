@@ -1,9 +1,9 @@
 import { getTopCustomers } from "@/app/admin/action";
 import Image from "next/image";
 import { Suspense } from "react";
-import LoadingSpinner from "./loading-spinner";
+import LoadingSpinner from "@/components/loading-spinner";
 import { anton } from "@/lib/fonts";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 
 const TopCustomers = async () => {
   return (

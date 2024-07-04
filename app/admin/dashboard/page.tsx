@@ -1,9 +1,9 @@
-import EcommerceRevenue from "@/components/admin/ecommerce-revenue";
-import AverageOrderValue from "@/components/admin/average-order-value";
-import TotalOrderCount from "@/components/admin/total-order-count";
-import MostSellingProducts from "@/components/admin/most-selling-products";
-import TopCustomers from "@/components/admin/top-customers";
-import RecentOrders from "@/components/admin/recent-orders";
+import EcommerceRevenue from "@/components/admin/dashboard/ecommerce-revenue";
+import AverageOrderValue from "@/components/admin/dashboard/average-order-value";
+import TotalOrderCount from "@/components/admin/dashboard/total-order-count";
+import MostSellingProducts from "@/components/admin/dashboard/most-selling-products";
+import TopCustomers from "@/components/admin/dashboard/top-customers";
+import RecentOrders from "@/components/admin/dashboard/recent-orders";
 const AdminDashboardPage = () => {
   return (
     <div className="grid grid-cols-5 grid-rows-4 gap-4 h-full">

@@ -25,8 +25,8 @@ const AdminNav = () => {
       icon: <RxDashboard className="h-6 w-6" />,
     },
     {
-      href: "/admin/customers",
-      label: "Customers",
+      href: "/admin/users",
+      label: "Users",
       icon: <FiUsers className="h-6 w-6" />,
     },
     {

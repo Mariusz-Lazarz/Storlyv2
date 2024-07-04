@@ -1,6 +1,6 @@
 import { getTotalOrders } from "@/app/admin/action";
 import { Suspense } from "react";
-import LoadingSpinner from "./loading-spinner";
+import LoadingSpinner from "@/components/loading-spinner";
 import { anton } from "@/lib/fonts";
 
 const TotalOrderCount = () => {

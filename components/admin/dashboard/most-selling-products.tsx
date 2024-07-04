@@ -1,7 +1,8 @@
 import Image from "next/image";
-import { Badge } from "../ui/badge";
+import { Badge } from "@/components/ui/badge";
 import { getMostSellingProducts } from "@/app/admin/action";
 import { anton } from "@/lib/fonts";
+import LoadingSpinner from "@/components/loading-spinner";
 
 const MostSellingProducts = async () => {
   return (

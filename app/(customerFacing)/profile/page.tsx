@@ -6,7 +6,7 @@ import { Suspense } from "react";
 import Link from "next/link";
 
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
-import LoadingSpinner from "@/components/admin/loading-spinner";
+import LoadingSpinner from "@/components/loading-spinner";
 import SignOutButton from "@/components/profile/sing-out-button";
 
 const SettingsPage = async () => {
