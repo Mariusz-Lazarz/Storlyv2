@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/db";
+import { skip } from "node:test";
 
 export const getTotalRevenue = async () => {
   const total = await prisma.order.findMany({
@@ -119,4 +120,40 @@ export const getMostSellingProducts = async () => {
       id: product?.id,
     };
   });
+};
+
+export const getAllProducts = async (page: number, query: string) => {
+  let products;
+  let count;
+  if (query) {
+    const product = await prisma.product.findFirst({
+      select: {
+        id: true,
+        name: true,
+        category: true,
+        price: true,
+        image: true,
+      },
+      where: {
+        id: query,
+      },
+    });
+    products = product ? [product] : [];
+    count = product ? 1 : 0;
+  } else {
+    products = await prisma.product.findMany({
+      take: 10,
+      skip: (page - 1) * 10,
+      select: {
+        id: true,
+        name: true,
+        category: true,
+        price: true,
+        image: true,
+      },
+    });
+    count = await prisma.product.count();
+  }
+
+  return { products, count };
 };
