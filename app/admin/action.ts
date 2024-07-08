@@ -215,3 +215,48 @@ export const getUsersCount = async (query: string) => {
   }
   return count;
 };
+
+export const getOrders = async (page: number, query: string) => {
+  let orders;
+  if (query) {
+    const order = await prisma.order.findFirst({
+      select: {
+        id: true,
+        status: true,
+        total: true,
+        createdAt: true,
+      },
+      where: {
+        id: query,
+      },
+    });
+    orders = order ? [order] : [];
+  } else {
+    orders = await prisma.order.findMany({
+      take: 10,
+      skip: (page - 1) * 10,
+      select: {
+        id: true,
+        status: true,
+        total: true,
+        createdAt: true,
+      },
+    });
+  }
+  return orders;
+};
+
+export const getOrdersCount = async (query: string) => {
+  let count;
+  if (query) {
+    const order = await prisma.order.findFirst({
+      where: {
+        id: query,
+      },
+    });
+    count = order ? 1 : 0;
+  } else {
+    count = await prisma.order.count();
+  }
+  return count;
+};
