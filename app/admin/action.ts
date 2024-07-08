@@ -122,8 +122,6 @@ export const getMostSellingProducts = async () => {
   });
 };
 
-// actions.js
-
 export const getProducts = async (page: number, query: string) => {
   let products;
   if (query) {
@@ -167,6 +165,53 @@ export const getProductCount = async (query: string) => {
     count = product ? 1 : 0;
   } else {
     count = await prisma.product.count();
+  }
+  return count;
+};
+
+export const getUsers = async (page: number, query: string) => {
+  let users;
+  if (query) {
+    const user = await prisma.user.findFirst({
+      select: {
+        id: true,
+        email: true,
+        image: true,
+        role: true,
+        createdAt: true,
+      },
+      where: {
+        OR: [{ id: query }, { email: query }],
+      },
+    });
+    users = user ? [user] : [];
+  } else {
+    users = await prisma.user.findMany({
+      take: 10,
+      skip: (page - 1) * 10,
+      select: {
+        id: true,
+        email: true,
+        image: true,
+        role: true,
+        createdAt: true,
+      },
+    });
+  }
+  return users;
+};
+
+export const getUsersCount = async (query: string) => {
+  let count;
+  if (query) {
+    const user = await prisma.user.findFirst({
+      where: {
+        id: query,
+      },
+    });
+    count = user ? 1 : 0;
+  } else {
+    count = await prisma.user.count();
   }
   return count;
 };

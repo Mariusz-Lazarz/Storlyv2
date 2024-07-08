@@ -19,12 +19,12 @@ const UserButton = () => {
     <>
       {session?.user ? (
         <Link href="/profile">
-          <IoPersonOutline className="h-[26px] w-[26px] cursor-pointer" />
+          <IoPersonOutline className="h-[30px] w-[30px] cursor-pointer" />
         </Link>
       ) : (
         <Dialog>
           <DialogTrigger>
-            <IoPersonOutline className="h-[26px] w-[26px] cursor-pointer" />
+            <IoPersonOutline className="h-[30px] w-[30px] cursor-pointer" />
           </DialogTrigger>
           <DialogContent>
             <DialogHeader className="flex gap-4">

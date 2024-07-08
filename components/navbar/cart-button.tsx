@@ -40,11 +40,11 @@ const CartButton = () => {
       <Link href={"/cart"}>
         <div className={`relative ${animate ? "animate-ping" : ""}`}>
           <IoBagOutline
-            className={`h-[26px] w-[26px] cursor-pointer `}
+            className={`h-[30px] w-[30px] cursor-pointer `}
             onClick={handleClick}
           />
           {cartItemCount > 0 && (
-            <span className="absolute inset-0 flex items-center top-1 justify-center text-xs font-bold text-black">
+            <span className="absolute inset-0 flex items-center top-2 justify-center text-xs font-bold text-black">
               {cartItemCount > 9 ? "9+" : cartItemCount}
             </span>
           )}
