@@ -12,7 +12,7 @@ import SignOutButton from "@/components/profile/sing-out-button";
 const SettingsPage = async () => {
   const user = await getServerUser();
   return (
-    <div className="p-4 md:p-20">
+    <div className="p-4 md:p-20 h-screen">
       <div className="flex gap-4 flex-col">
         <div className="flex flex-row items-center justify-between">
           <span className="text-3xl font-semibold uppercase">

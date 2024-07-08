@@ -2,9 +2,9 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import { ItemProps } from "@/lib/definition";
 import axios from "axios";
-import LoadingBar from "@/components/loading-bar";
 
 import Item from "@/components/item/item";
+import LoadingSpinner from "@/components/loading-spinner";
 const FavoritePage = () => {
   const [items, setItems] = useState<ItemProps[]>([]);
   const [page, setPage] = useState<number>(0);
@@ -61,7 +61,7 @@ const FavoritePage = () => {
     loadItems(0);
   }, [loadItems]);
   return (
-    <>
+    <div className="min-h-screen overflow-auto">
       {items.length > 0 && (
         <div className="p-4 grid gap-4 grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
           {items.map((item) => (
@@ -73,8 +73,12 @@ const FavoritePage = () => {
         <div className="text-center text-4xl mt-10">No items found </div>
       )}
       <div ref={lastElementRef} />
-      {isLoading && <LoadingBar />}
-    </>
+      {isLoading && (
+        <div className="h-screen w-full">
+          <LoadingSpinner />
+        </div>
+      )}
+    </div>
   );
 };
 

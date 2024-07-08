@@ -2,10 +2,10 @@
 import Item from "./item";
 import { useState, useRef, useCallback, useEffect } from "react";
 import axios from "axios";
-import LoadingBar from "../loading-bar";
 import Filter from "./filter";
 import { ItemProps } from "@/lib/definition";
 import { useSearchParams } from "next/navigation";
+import LoadingSpinner from "../loading-spinner";
 
 const ItemsGrid = () => {
   const [items, setItems] = useState<ItemProps[]>([]);
@@ -106,7 +106,11 @@ const ItemsGrid = () => {
         <div className="text-center text-4xl">No items found </div>
       )}
       <div ref={lastElementRef} />
-      {isLoading && <LoadingBar />}
+      {isLoading && (
+        <div className="h-screen w-full">
+          <LoadingSpinner />
+        </div>
+      )}
     </>
   );
 };
