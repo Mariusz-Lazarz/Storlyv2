@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/db";
-import { skip } from "node:test";
+const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
 export const getTotalRevenue = async () => {
   const total = await prisma.order.findMany({
@@ -122,6 +122,7 @@ export const getMostSellingProducts = async () => {
   });
 };
 
+// actions.js
 
 export const getProducts = async (page: number, query: string) => {
   let products;

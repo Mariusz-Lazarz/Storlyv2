@@ -20,12 +20,6 @@ const ProductTableBody = async ({
   query: string;
 }) => {
   const products = await getProducts(page, query);
-  if (products.length === 0 || !products)
-    return (
-      <div className="w-full h-full flex justify-center items-center text-red-500 text-2xl">
-        No products found
-      </div>
-    );
   return (
     <div className="overflow-auto">
       {products.map((product) => (
@@ -60,5 +54,8 @@ const ProductTableBody = async ({
     </div>
   );
 };
+
+
+
 
 export default ProductTableBody;
