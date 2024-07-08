@@ -122,11 +122,8 @@ export const getMostSellingProducts = async () => {
   });
 };
 
-// actions.js
-const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
 export const getProducts = async (page: number, query: string) => {
-  await delay(10000);
   let products;
   if (query) {
     const product = await prisma.product.findFirst({
@@ -159,7 +156,6 @@ export const getProducts = async (page: number, query: string) => {
 };
 
 export const getProductCount = async (query: string) => {
-  // await delay(10000);
   let count;
   if (query) {
     const product = await prisma.product.findFirst({
