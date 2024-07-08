@@ -36,7 +36,6 @@ const TablePagination = ({ count, page }: { count: number; page: number }) => {
 
   useEffect(() => {
     setIsLoading(false);
-    console.log(page);
   }, [page]);
 
   const totalPages = count / 10;

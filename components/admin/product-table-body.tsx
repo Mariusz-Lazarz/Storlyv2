@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { getProducts } from "@/app/admin/action";
 
 interface TableProductsProps {
   products: {
@@ -11,7 +12,14 @@ interface TableProductsProps {
   }[];
 }
 
-const ProductTableBody = ({ products }: TableProductsProps) => {
+const ProductTableBody = async ({
+  page,
+  query,
+}: {
+  page: number;
+  query: string;
+}) => {
+  const products = await getProducts(page, query);
   if (products.length === 0 || !products)
     return (
       <div className="w-full h-full flex justify-center items-center text-red-500 text-2xl">

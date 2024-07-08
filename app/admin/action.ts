@@ -122,9 +122,12 @@ export const getMostSellingProducts = async () => {
   });
 };
 
-export const getAllProducts = async (page: number, query: string) => {
+// actions.js
+const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
+
+export const getProducts = async (page: number, query: string) => {
+  await delay(10000);
   let products;
-  let count;
   if (query) {
     const product = await prisma.product.findFirst({
       select: {
@@ -139,7 +142,6 @@ export const getAllProducts = async (page: number, query: string) => {
       },
     });
     products = product ? [product] : [];
-    count = product ? 1 : 0;
   } else {
     products = await prisma.product.findMany({
       take: 10,
@@ -152,8 +154,22 @@ export const getAllProducts = async (page: number, query: string) => {
         image: true,
       },
     });
+  }
+  return products;
+};
+
+export const getProductCount = async (query: string) => {
+  // await delay(10000);
+  let count;
+  if (query) {
+    const product = await prisma.product.findFirst({
+      where: {
+        id: query,
+      },
+    });
+    count = product ? 1 : 0;
+  } else {
     count = await prisma.product.count();
   }
-
-  return { products, count };
+  return count;
 };
