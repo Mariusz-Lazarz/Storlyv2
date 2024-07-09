@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { getOrders } from "@/app/admin/action";
+import { Badge } from "../ui/badge";
 
 const formatDate = (isoDateString: Date) => {
   const date = new Date(isoDateString);
@@ -26,8 +27,8 @@ const OrderTableBody = async ({
           <div className="flex flex-row items-center gap-2 justify-center">
             <span className="truncate">{order.id}</span>
           </div>
-          <span className="text-center flex items-center justify-center">
-            {order.status}
+          <span className="text-center flex items-center justify-center uppercase p-2">
+            <Badge variant="outline">{order.status}</Badge>
           </span>
           <span className="text-center flex items-center justify-center uppercase">
             ${(order.total! / 100).toFixed(2)}

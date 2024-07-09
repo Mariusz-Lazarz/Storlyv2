@@ -21,7 +21,6 @@ const CartButton = () => {
     }
   };
 
-  // Sum the quantities of all items in the cart
   const cartItemCount = cartItems.reduce(
     (total, item) => total + item.quantity,
     0
@@ -30,19 +29,16 @@ const CartButton = () => {
   useEffect(() => {
     if (cartItemCount > 0) {
       setAnimate(true);
-      const timer = setTimeout(() => setAnimate(false), 500); // Duration of the animation
+      const timer = setTimeout(() => setAnimate(false), 500);
       return () => clearTimeout(timer);
     }
   }, [cartItemCount]);
 
   return (
     <>
-      <Link href={"/cart"}>
+      <Link href={"/cart"} onClick={handleClick}>
         <div className={`relative ${animate ? "animate-ping" : ""}`}>
-          <IoBagOutline
-            className={`h-[30px] w-[30px] cursor-pointer `}
-            onClick={handleClick}
-          />
+          <IoBagOutline className={`h-[30px] w-[30px] cursor-pointer `} />
           {cartItemCount > 0 && (
             <span className="absolute inset-0 flex items-center top-2 justify-center text-xs font-bold text-black">
               {cartItemCount > 9 ? "9+" : cartItemCount}

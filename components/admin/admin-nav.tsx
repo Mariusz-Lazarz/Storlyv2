@@ -7,6 +7,8 @@ import { IoBagCheckOutline } from "react-icons/io5";
 import { IoCartOutline } from "react-icons/io5";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Button } from "../ui/button";
+import { signOut } from "next-auth/react";
 
 const AdminNav = () => {
   const pathname = usePathname();
@@ -41,6 +43,10 @@ const AdminNav = () => {
     },
   ];
 
+  const signOutHandler = async () => {
+    await signOut();
+  };
+
   return (
     <div className="bg-black p-4 text-white flex flex-col w-2/12">
       <div>
@@ -58,6 +64,11 @@ const AdminNav = () => {
             <span>{link.label}</span>
           </Link>
         ))}
+      </div>
+      <div className="w-full flex justify-center mt-auto text-black">
+        <Button onClick={signOutHandler} variant="outline">
+          Sign out
+        </Button>
       </div>
       <div className="mt-auto">
         ⓘ Admin dashboard is not designed to be responsive due to large

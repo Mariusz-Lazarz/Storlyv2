@@ -63,7 +63,7 @@ const footerSections = [
 
 const Footer = () => {
   return (
-    <div >
+    <div>
       <div className="w-full h-[1px] bg-gray-600 my-4"></div>
       <div className="hidden md:flex flex-row justify-between p-4">
         {footerSections.map((section, index) => (
@@ -82,11 +82,13 @@ const Footer = () => {
       {footerSections.map((section, index) => (
         <Accordion type="multiple" key={index} className="block md:hidden">
           <AccordionItem value={`item-${index}`}>
-            <AccordionTrigger className="font-bold">
+            <AccordionTrigger className="font-bold p-4">
               {section.title}
             </AccordionTrigger>
             {section.items.map((item, idx) => (
-              <AccordionContent key={idx}>{item}</AccordionContent>
+              <AccordionContent key={idx} className="p-4">
+                {item}
+              </AccordionContent>
             ))}
           </AccordionItem>
         </Accordion>

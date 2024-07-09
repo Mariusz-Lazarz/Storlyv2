@@ -17,7 +17,7 @@ const AdminOrderPage = async ({
 
   return (
     <div className="w-full h-full border-[0.5px] border-slate-300 rounded-lg shadow-lg flex flex-col">
-      <TableSearchNav label="products" placeholder="Search by name or id..." />
+      <TableSearchNav label="products" placeholder="Search by id..." />
       <div className="flex flex-col flex-grow overflow-hidden">
         <TableNavLabels navLabels={["id", "status", "total", "date"]} />
         <div className="w-full h-[1px] bg-slate-300"></div>
