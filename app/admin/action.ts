@@ -229,6 +229,9 @@ export const getOrders = async (page: number, query: string) => {
       where: {
         id: query,
       },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
     orders = order ? [order] : [];
   } else {
@@ -240,6 +243,9 @@ export const getOrders = async (page: number, query: string) => {
         status: true,
         total: true,
         createdAt: true,
+      },
+      orderBy: {
+        createdAt: "desc",
       },
     });
   }
