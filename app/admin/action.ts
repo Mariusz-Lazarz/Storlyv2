@@ -1,4 +1,7 @@
+"use server";
+import { z } from "zod";
 import { prisma } from "@/lib/db";
+import { revalidatePath } from "next/cache";
 const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
 export const getTotalRevenue = async () => {
@@ -266,3 +269,68 @@ export const getOrdersCount = async (query: string) => {
   }
   return count;
 };
+
+const productSchema = z.object({
+  name: z.string().min(3, {
+    message: "Name should be atleast 3 characters long",
+  }),
+  category: z.string().min(3, {
+    message: "Category should be atleast 3 characters long",
+  }),
+  brand: z.string().min(3, {
+    message: "Brand should be atleast 3 characters long",
+  }),
+  gender: z.string().min(3, {
+    message: "Gender should be atleast 3 characters long",
+  }),
+  price: z.number().min(1, {
+    message: "Price is required",
+  }),
+  image: z.string().startsWith("https://images.unsplash.com/photo", {
+    message: "Image has to be a free unsplash image",
+  }),
+});
+
+export async function addProduct(prevState: any, formData: FormData) {
+  const validatedFields = productSchema.safeParse({
+    name: formData.get("name"),
+    category: formData.get("category"),
+    brand: formData.get("brand"),
+    gender: formData.get("gender"),
+    price: Number(formData.get("price")),
+    image: formData.get("image"),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      ...prevState,
+      errors: validatedFields.error.flatten().fieldErrors,
+    };
+  }
+
+  try {
+    await prisma.product.create({
+      data: {
+        name: validatedFields.data.name.toLocaleLowerCase(),
+        category: validatedFields.data.category.toLocaleLowerCase(),
+        brand: validatedFields.data.brand.toLocaleLowerCase(),
+        gender: validatedFields.data.gender.toLocaleLowerCase(),
+        price: validatedFields.data.price,
+        image: validatedFields.data.image,
+      },
+    });
+
+    revalidatePath("/admin/products");
+    return {
+      ...prevState,
+      message: "Product added successfully",
+      errors: {},
+    };
+  } catch (error) {
+    return {
+      ...prevState,
+      message: "",
+      errors: { general: "Failed to add product, Try again!" },
+    };
+  }
+}

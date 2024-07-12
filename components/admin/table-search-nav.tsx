@@ -5,6 +5,7 @@ import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { anton } from "@/lib/fonts";
 import { useState, useCallback, useEffect } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { AddProductForm } from "./add-product-form";
 
 interface TableSearchProps {
   label: string;
@@ -52,7 +53,9 @@ const TableSearchNav = ({ label, placeholder }: TableSearchProps) => {
           />
           <MagnifyingGlassIcon className="h-6 w-6 absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer" />
         </div>
-        <div></div>
+        <div>
+          <AddProductForm />
+        </div>
       </div>
       <div className="w-full h-[1px] bg-slate-300"></div>
     </div>

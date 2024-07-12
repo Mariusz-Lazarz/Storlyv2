@@ -2,14 +2,12 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { getProducts } from "@/app/admin/action";
 
-interface TableProductsProps {
-  products: {
-    id: string;
-    name: string;
-    category: string;
-    price: number;
-    image: string;
-  }[];
+interface TableProductProps {
+  id: string;
+  name: string;
+  category: string;
+  price: number;
+  image: string;
 }
 
 const ProductTableBody = async ({
@@ -22,7 +20,7 @@ const ProductTableBody = async ({
   const products = await getProducts(page, query);
   return (
     <div className="overflow-auto">
-      {products.map((product) => (
+      {products.map((product: TableProductProps) => (
         <div className="p-4 grid grid-cols-5 text-center" key={product.id}>
           <div className="flex flex-row items-center gap-2 justify-start">
             <div className="relative w-12 h-12">
@@ -54,8 +52,5 @@ const ProductTableBody = async ({
     </div>
   );
 };
-
-
-
 
 export default ProductTableBody;
