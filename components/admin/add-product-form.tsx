@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { useFormState } from "react-dom";
@@ -41,7 +43,7 @@ export function AddProductForm() {
         </Button>
       </DialogTrigger>
       <DialogContent className="p-0">
-        <div className="flex justify-center items-center h-full">
+        <div className="flex justify-center items-center h-[600px]">
           <div className=" w-[500px] flex flex-col justify-center items-center gap-4 p-6">
             <span className={`${anton.className} text-2xl`}>
               Add New Product
@@ -162,7 +164,7 @@ export function AddProductForm() {
                   placeholder="https://images.unsplash.com/photo-1633292587737..."
                 />
               </div>
-              <SubmitButton />
+              <SubmitButton text="Add" />
             </form>
           </div>
         </div>

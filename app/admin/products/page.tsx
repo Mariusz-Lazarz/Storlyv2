@@ -5,6 +5,7 @@ import { getProductCount, getProducts } from "../action";
 import TableNavLabels from "@/components/admin/table-nav-labels";
 import { Suspense } from "react";
 import LoadingSpinner from "@/components/loading-spinner";
+import { AddProductForm } from "@/components/admin/add-product-form";
 
 const AdminProductPage = async ({
   searchParams,
@@ -17,7 +18,11 @@ const AdminProductPage = async ({
 
   return (
     <div className="w-full h-full border-[0.5px] border-slate-300 rounded-lg shadow-lg flex flex-col">
-      <TableSearchNav label="products" placeholder="Search by name or id..." />
+      <TableSearchNav
+        label="products"
+        placeholder="Search by name or id..."
+        button={<AddProductForm />}
+      />
       <div className="flex flex-col flex-grow overflow-hidden">
         <TableNavLabels navLabels={["id", "name", "category", "price"]} />
         <div className="w-full h-[1px] bg-slate-300"></div>

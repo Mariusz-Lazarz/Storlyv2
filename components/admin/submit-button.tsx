@@ -3,11 +3,11 @@
 import { Button } from "../ui/button";
 import { useFormStatus } from "react-dom";
 
-const SubmitButton = () => {
+const SubmitButton = ({ text }: { text: string }) => {
   const { pending } = useFormStatus();
   return (
     <Button type="submit" disabled={pending}>
-      {pending ? 'Adding...' : 'Add'}
+      {pending ? "Loading..." : text}
     </Button>
   );
 };
