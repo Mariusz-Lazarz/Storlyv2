@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { getUsers } from "@/app/admin/action";
+import DeleteButton from "./delete-button";
 
 const formatDate = (isoDateString: Date) => {
   const date = new Date(isoDateString);
@@ -47,7 +48,7 @@ const UserTableBody = async ({
           </span>
           <div className="flex flex-row items-center justify-center gap-2">
             <Button variant="outline">View</Button>
-            <Button variant="destructive">Delete</Button>
+            <DeleteButton />
           </div>
         </div>
       ))}
