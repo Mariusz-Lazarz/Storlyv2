@@ -2,16 +2,9 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { getUsers } from "@/app/admin/action";
 import DeleteButton from "./delete-button";
+import { formatDate } from "@/lib/helpers";
 
-const formatDate = (isoDateString: Date) => {
-  const date = new Date(isoDateString);
 
-  const year = date.getUTCFullYear();
-  const month = (date.getUTCMonth() + 1).toString().padStart(2, "0");
-  const day = date.getUTCDate().toString().padStart(2, "0");
-
-  return `${day}.${month}.${year}`;
-};
 
 const UserTableBody = async ({
   page,

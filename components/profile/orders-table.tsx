@@ -16,22 +16,13 @@ import {
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { getUserOrders } from "@/app/actions";
+import { formatDate } from "@/lib/helpers";
 
 const OrdersTable = async () => {
   const orders = await getUserOrders();
   if (!orders) return;
 
   const ordersTotal = orders.reduce((acc, cur) => acc + cur.total!, 0);
-
-  const formatDate = (isoDateString: Date) => {
-    const date = new Date(isoDateString);
-
-    const year = date.getUTCFullYear();
-    const month = (date.getUTCMonth() + 1).toString().padStart(2, "0");
-    const day = date.getUTCDate().toString().padStart(2, "0");
-
-    return `${day}.${month}.${year}`;
-  };
 
   return (
     <Table>
