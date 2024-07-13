@@ -2,14 +2,8 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { getProducts } from "@/app/admin/action";
 import DeleteButton from "./delete-button";
-
-interface TableProductProps {
-  id: string;
-  name: string;
-  category: string;
-  price: number;
-  image: string;
-}
+import { TableProductProps } from "@/lib/definition";
+import { EditProductForm } from "./edit-product-form";
 
 const ProductTableBody = async ({
   page,
@@ -45,7 +39,8 @@ const ProductTableBody = async ({
             ${product.price}
           </span>
           <div className="flex flex-row items-center justify-center gap-2">
-            <Button variant="outline">View</Button>
+            {/* <Button variant="outline">View</Button> */}
+            <EditProductForm product={product} />
             <DeleteButton />
           </div>
         </div>

@@ -2,7 +2,6 @@
 import { z } from "zod";
 import { prisma } from "@/lib/db";
 import { revalidatePath } from "next/cache";
-const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
 export const getTotalRevenue = async () => {
   const total = await prisma.order.findMany({
@@ -129,13 +128,6 @@ export const getProducts = async (page: number, query: string) => {
   let products;
   if (query) {
     const product = await prisma.product.findFirst({
-      select: {
-        id: true,
-        name: true,
-        category: true,
-        price: true,
-        image: true,
-      },
       where: {
         id: query,
       },
@@ -145,13 +137,6 @@ export const getProducts = async (page: number, query: string) => {
     products = await prisma.product.findMany({
       take: 10,
       skip: (page - 1) * 10,
-      select: {
-        id: true,
-        name: true,
-        category: true,
-        price: true,
-        image: true,
-      },
     });
   }
   return products;
@@ -270,7 +255,7 @@ export const getOrdersCount = async (query: string) => {
   return count;
 };
 
-const productSchema = z.object({
+const baseProductSchema = z.object({
   name: z.string().min(3, {
     message: "Name should be atleast 3 characters long",
   }),
@@ -291,15 +276,77 @@ const productSchema = z.object({
   }),
 });
 
-export async function addProduct(prevState: any, formData: FormData) {
-  const validatedFields = productSchema.safeParse({
+const addProductSchema = baseProductSchema;
+
+const updateProductSchema = baseProductSchema.extend({
+  id: z.string().min(1, { message: "No product Id provided" }),
+});
+
+const validateProductData = (schema: z.ZodSchema, data: any) => {
+  return schema.safeParse(data);
+};
+
+const handleProductOperation = async (
+  prevState: any,
+  validatedFields: any,
+  operation: "create" | "update",
+  revalidatePath: (path: string) => void
+) => {
+  try {
+    if (operation === "create") {
+      await prisma.product.create({
+        data: {
+          name: validatedFields.data.name.toLocaleLowerCase(),
+          category: validatedFields.data.category.toLocaleLowerCase(),
+          brand: validatedFields.data.brand.toLocaleLowerCase(),
+          gender: validatedFields.data.gender.toLocaleLowerCase(),
+          price: validatedFields.data.price,
+          image: validatedFields.data.image,
+        },
+      });
+    } else if (operation === "update") {
+      await prisma.product.update({
+        where: {
+          id: validatedFields.data.id,
+        },
+        data: {
+          name: validatedFields.data.name.toLocaleLowerCase(),
+          category: validatedFields.data.category.toLocaleLowerCase(),
+          brand: validatedFields.data.brand.toLocaleLowerCase(),
+          gender: validatedFields.data.gender.toLocaleLowerCase(),
+          price: validatedFields.data.price,
+          image: validatedFields.data.image,
+        },
+      });
+    }
+
+    revalidatePath("/admin/products");
+
+    return {
+      ...prevState,
+      message: `Product ${operation}d successfully`,
+      errors: {},
+    };
+  } catch (error) {
+    return {
+      ...prevState,
+      message: "",
+      errors: { general: `Failed to ${operation} product, Try again!` },
+    };
+  }
+};
+
+export const addProduct = async (prevState: any, formData: FormData) => {
+  const data = {
     name: formData.get("name"),
     category: formData.get("category"),
     brand: formData.get("brand"),
     gender: formData.get("gender"),
     price: Number(formData.get("price")),
     image: formData.get("image"),
-  });
+  };
+
+  const validatedFields = validateProductData(addProductSchema, data);
 
   if (!validatedFields.success) {
     return {
@@ -308,29 +355,38 @@ export async function addProduct(prevState: any, formData: FormData) {
     };
   }
 
-  try {
-    await prisma.product.create({
-      data: {
-        name: validatedFields.data.name.toLocaleLowerCase(),
-        category: validatedFields.data.category.toLocaleLowerCase(),
-        brand: validatedFields.data.brand.toLocaleLowerCase(),
-        gender: validatedFields.data.gender.toLocaleLowerCase(),
-        price: validatedFields.data.price,
-        image: validatedFields.data.image,
-      },
-    });
+  return handleProductOperation(
+    prevState,
+    validatedFields,
+    "create",
+    revalidatePath
+  );
+};
 
-    revalidatePath("/admin/products");
+export const updateProduct = async (prevState: any, formData: FormData) => {
+  const data = {
+    name: formData.get("name"),
+    category: formData.get("category"),
+    brand: formData.get("brand"),
+    gender: formData.get("gender"),
+    price: Number(formData.get("price")),
+    image: formData.get("image"),
+    id: formData.get("productId"),
+  };
+
+  const validatedFields = validateProductData(updateProductSchema, data);
+
+  if (!validatedFields.success) {
     return {
       ...prevState,
-      message: "Product added successfully",
-      errors: {},
-    };
-  } catch (error) {
-    return {
-      ...prevState,
-      message: "",
-      errors: { general: "Failed to add product, Try again!" },
+      errors: validatedFields.error.flatten().fieldErrors,
     };
   }
-}
+
+  return handleProductOperation(
+    prevState,
+    validatedFields,
+    "update",
+    revalidatePath
+  );
+};
